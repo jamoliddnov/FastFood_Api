@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+
+	<ItemGroup>
+		<ProjectReference Include="..\FastFood_Web.Domain\FastFood_Web.Domain.csproj" />
+	</ItemGroup>
+	
 </Project>

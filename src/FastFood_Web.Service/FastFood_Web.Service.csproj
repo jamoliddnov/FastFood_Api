@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+
+	<ItemGroup>
+		<ProjectReference Include="..\FastFood_Web.DataAccess\FastFood_Web.DataAccess.csproj" />
+	</ItemGroup>
 </Project>

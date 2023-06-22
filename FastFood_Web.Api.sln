@@ -8,12 +8,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{11C4E9CC-1E89-4273-9703-F8EC6776EBDE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastFood_Web.Api", "src\FastFood_Web.Api\FastFood_Web.Api.csproj", "{7BEA7836-C5B5-4BFE-8EC1-22E83DFE2514}"
+	ProjectSection(ProjectDependencies) = postProject
+		{553EAC69-1842-4809-AF5E-39BAFE773385} = {553EAC69-1842-4809-AF5E-39BAFE773385}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastFood_Web.DataAccess", "src\FastFood_Web.DataAccess\FastFood_Web.DataAccess.csproj", "{F55FEB3F-CAD5-4C8F-881A-9694CECFAE4A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D34E7E09-687D-4BDF-835D-7E7264E2E2F7} = {D34E7E09-687D-4BDF-835D-7E7264E2E2F7}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastFood_Web.Domain", "src\FastFood_Web.Domain\FastFood_Web.Domain.csproj", "{D34E7E09-687D-4BDF-835D-7E7264E2E2F7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastFood_Web.Service", "src\FastFood_Web.Service\FastFood_Web.Service.csproj", "{553EAC69-1842-4809-AF5E-39BAFE773385}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F55FEB3F-CAD5-4C8F-881A-9694CECFAE4A} = {F55FEB3F-CAD5-4C8F-881A-9694CECFAE4A}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastFood_Web.Test", "test\FastFood_Web.Test\FastFood_Web.Test.csproj", "{0043A080-C31C-464E-B0D7-04BAC8DA4663}"
 EndProject

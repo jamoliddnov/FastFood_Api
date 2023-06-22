@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+
+	<ItemGroup>
+		<ProjectReference Include="..\FastFood_Web.Service\FastFood_Web.Service.csproj" />
+	</ItemGroup>
+
 </Project>
