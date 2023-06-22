@@ -6,6 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.18" />
+  </ItemGroup>
+
 
 	<ItemGroup>
 		<ProjectReference Include="..\FastFood_Web.Domain\FastFood_Web.Domain.csproj" />
