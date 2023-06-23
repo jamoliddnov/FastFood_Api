@@ -8,7 +8,9 @@ namespace FastFood_Web.Domain.Enums
 {
     public enum UserRole
     {
-        User = 0,
-        Admin = 1,
+        Customer = 0,
+        AllocationOperator = 1,
+        ReceivingOperator = 2,
+        Deliver = 3
     }
 }

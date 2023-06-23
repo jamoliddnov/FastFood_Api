@@ -6,6 +6,7 @@ namespace FastFood_Web.Domain.Entities
     {
         public string Email { get; set; } = String.Empty;
         public bool IsDeleteProfile { get; set; } = false;
-        public DateTime CreatedAt { get; set; }
+        public byte Canceled { get; set; } = 0;
+        public UserRole UserRole { get; set; } = UserRole.Customer;
     }
 }
