@@ -19,10 +19,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\FastFood_Web.Domain\FastFood_Web.Domain.csproj" />
 	</ItemGroup>
-
-
-	<ItemGroup>
-	  <Folder Include="Repositories\Common\" />
-	</ItemGroup>
 	
 </Project>
