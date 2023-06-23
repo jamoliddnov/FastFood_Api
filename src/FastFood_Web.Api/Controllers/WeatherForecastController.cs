@@ -1,4 +1,3 @@
-using FastFood_Web.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastFood_Web.Api.Controllers
@@ -30,7 +29,7 @@ namespace FastFood_Web.Api.Controllers
             })
             .ToArray();
 
-          
+
         }
     }
 }

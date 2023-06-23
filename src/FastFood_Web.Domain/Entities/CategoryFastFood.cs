@@ -4,6 +4,6 @@ namespace FastFood_Web.Domain.Entities
 {
     public class CategoryFastFood : Base
     {
-        public string CategoryName { get; set; } = String.Empty; 
+        public string CategoryName { get; set; } = String.Empty;
     }
 }
