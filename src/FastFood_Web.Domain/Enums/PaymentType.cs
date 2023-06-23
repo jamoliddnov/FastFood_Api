@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FastFood_Web.Domain.Enums
 {
-    public enum AdminRole
+    public enum PaymentType
     {
-        AllocationOperator = 0,
-        ReceivingOperator = 1,
+        Cash = 0,
+        Card = 1
     }
 }

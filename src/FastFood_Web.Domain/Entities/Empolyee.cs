@@ -2,10 +2,10 @@
 
 namespace FastFood_Web.Domain.Entities
 {
-    public class Admin : User
+    public class Empolyee : User
     {
-        public AdminRole AdminRole { get; set; }
-        public int DistrictFilialId { get; set; } = 0;
+        public UserRole UserRole { get; set; }
+        public Guid DistrictFilialId { get; set; }
         public virtual DistrictFilial DistrictFilial { get; set; } = default!;
         
     }
