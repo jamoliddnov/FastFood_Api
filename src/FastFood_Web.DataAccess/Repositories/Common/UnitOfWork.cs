@@ -30,13 +30,28 @@ namespace FastFood_Web.DataAccess.Repositories.Common
         public UnitOfWork(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-
-
+            AllocationOperator = new AllocationOperatorRepositorie(appDbContext);
+            CategoryFastFood = new CategoryFastFoodRepositorie(appDbContext);
+            Customer = new CustomerRepositorie(appDbContext);
+            Deliver = new DeliverRepositorie(appDbContext);
+            District = new DistrictRepositorie(appDbContext);
+            DistrictFilial = new DistrictFilialRepositorie(appDbContext);
+            Order = new OrderRepositorie(appDbContext);
+            OrderDetail = new OrderDetailRepositorie(appDbContext);
+            RecevingOperator = new RecevingOperatorRepositorie(appDbContext);
+            TypeFastFood = new TypeFastFoodRepositorie(appDbContext);
         }
 
-        public Task<int> SaveChangeAsync()
+        public async Task<int> SaveChangeAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await _appDbContext.SaveChangesAsync();
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }
