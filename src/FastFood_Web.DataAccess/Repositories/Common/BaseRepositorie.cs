@@ -44,8 +44,8 @@ namespace FastFood_Web.DataAccess.Repositories.Common
                 }
             }
             catch
-            { 
-                            
+            {
+
             }
         }
 
@@ -53,7 +53,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
         {
             try
             {
-               return await _dbSet.FindAsync(guid);
+                return await _dbSet.FindAsync(guid);
             }
             catch
             {
@@ -80,8 +80,8 @@ namespace FastFood_Web.DataAccess.Repositories.Common
                 context.Entry<T>(entity!).State = EntityState.Detached;
             }
             catch
-            { 
-            
+            {
+
             }
         }
 
@@ -90,11 +90,11 @@ namespace FastFood_Web.DataAccess.Repositories.Common
             try
             {
                 entity.Id = guid;
-                _dbSet.Update(entity);   
+                _dbSet.Update(entity);
             }
             catch
-            { 
-            
+            {
+
             }
         }
     }

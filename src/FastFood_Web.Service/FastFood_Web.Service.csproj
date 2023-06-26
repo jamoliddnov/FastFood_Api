@@ -10,4 +10,10 @@
 	<ItemGroup>
 		<ProjectReference Include="..\FastFood_Web.DataAccess\FastFood_Web.DataAccess.csproj" />
 	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Folder Include="Helpers\" />
+	  <Folder Include="ViewModels\" />
+	</ItemGroup>
 </Project>
