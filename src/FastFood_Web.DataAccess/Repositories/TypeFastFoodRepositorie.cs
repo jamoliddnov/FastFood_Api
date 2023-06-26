@@ -2,7 +2,6 @@
 using FastFood_Web.DataAccess.Interfaces;
 using FastFood_Web.DataAccess.Repositories.Common;
 using FastFood_Web.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace FastFood_Web.DataAccess.Repositories
 {
