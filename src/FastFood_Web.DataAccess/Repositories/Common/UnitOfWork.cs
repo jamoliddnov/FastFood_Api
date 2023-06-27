@@ -8,38 +8,38 @@ namespace FastFood_Web.DataAccess.Repositories.Common
     {
         private AppDbContext _appDbContext;
 
-        public IAllocationOperatorRepositore AllocationOperator { get; }
+        public IAllocationOperatorRepositore AllocationOperators { get; }
 
-        public ICategoryFastFoodRepositorie CategoryFastFood { get; }
+        public ICategoryFastFoodRepositorie CategoryFastFoods { get; }
 
-        public ICustomerRepositorie Customer { get; }
+        public ICustomerRepositorie Customers { get; }
 
-        public IDeliverRepositorie Deliver { get; }
-        public IDistrictRepositorie District { get; }
+        public IDeliverRepositorie Delivers { get; }
+        public IDistrictRepositorie Districts { get; }
 
-        public IDistrictFilialRepositorie DistrictFilial { get; }
+        public IDistrictFilialRepositorie DistrictFilials { get; }
 
-        public IOrderRepositorie Order { get; }
+        public IOrderRepositorie Orders { get; }
 
-        public IOrderDetailRepositorie OrderDetail { get; }
+        public IOrderDetailRepositorie OrderDetails { get; }
 
-        public IRecevingOperatorRepositorie RecevingOperator { get; }
+        public IRecevingOperatorRepositorie RecevingOperators { get; }
 
-        public ITypeFastFoodRepositorie TypeFastFood { get; }
+        public ITypeFastFoodRepositorie TypeFastFoods { get; }
 
         public UnitOfWork(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
-            AllocationOperator = new AllocationOperatorRepositorie(appDbContext);
-            CategoryFastFood = new CategoryFastFoodRepositorie(appDbContext);
-            Customer = new CustomerRepositorie(appDbContext);
-            Deliver = new DeliverRepositorie(appDbContext);
-            District = new DistrictRepositorie(appDbContext);
-            DistrictFilial = new DistrictFilialRepositorie(appDbContext);
-            Order = new OrderRepositorie(appDbContext);
-            OrderDetail = new OrderDetailRepositorie(appDbContext);
-            RecevingOperator = new RecevingOperatorRepositorie(appDbContext);
-            TypeFastFood = new TypeFastFoodRepositorie(appDbContext);
+            AllocationOperators = new AllocationOperatorRepositorie(appDbContext);
+            CategoryFastFoods = new CategoryFastFoodRepositorie(appDbContext);
+            Customers = new CustomerRepositorie(appDbContext);
+            Delivers = new DeliverRepositorie(appDbContext);
+            Districts = new DistrictRepositorie(appDbContext);
+            DistrictFilials = new DistrictFilialRepositorie(appDbContext);
+            Orders = new OrderRepositorie(appDbContext);
+            OrderDetails = new OrderDetailRepositorie(appDbContext);
+            RecevingOperators = new RecevingOperatorRepositorie(appDbContext);
+            TypeFastFoods = new TypeFastFoodRepositorie(appDbContext);
         }
 
         public async Task<int> SaveChangeAsync()

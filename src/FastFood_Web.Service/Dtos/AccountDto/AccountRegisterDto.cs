@@ -1,4 +1,5 @@
-﻿using FastFood_Web.Service.Common.Attributes;
+﻿using FastFood_Web.Domain.Entities;
+using FastFood_Web.Service.Common.Attributes;
 using System.ComponentModel.DataAnnotations;
 
 namespace FastFood_Web.Service.Dtos.AccountDto
@@ -13,6 +14,17 @@ namespace FastFood_Web.Service.Dtos.AccountDto
         public string Email { get; set; } = String.Empty;
         [Required, PasswordAttribute]
         public string Password { get; set; } = String.Empty;
+
+        public static implicit operator Customer(AccountRegisterDto registerDto)
+        {
+            return new Customer()
+            {
+                FullName = registerDto.FullName,
+                PhoneNumber = registerDto.PhoneNumber,
+                Email = registerDto.Email,
+                PasswordHash = registerDto.Password
+            };
+        }
     }
 }
 
