@@ -2,16 +2,16 @@
 {
     public interface IUnitOfWork
     {
-        public IAllocationOperatorRepositore AllocationOperator { get; }
-        public ICategoryFastFoodRepositorie CategoryFastFood { get; }
-        public ICustomerRepositorie Customer { get; }
-        public IDeliverRepositorie Deliver { get; }
-        public IDistrictRepositorie District { get; }
-        public IDistrictFilialRepositorie DistrictFilial { get; }
-        public IOrderRepositorie Order { get; }
-        public IOrderDetailRepositorie OrderDetail { get; }
-        public IRecevingOperatorRepositorie RecevingOperator { get; }
-        public ITypeFastFoodRepositorie TypeFastFood { get; }
+        public IAllocationOperatorRepositore AllocationOperators { get; }
+        public ICategoryFastFoodRepositorie CategoryFastFoods { get; }
+        public ICustomerRepositorie Customers { get; }
+        public IDeliverRepositorie Delivers { get; }
+        public IDistrictRepositorie Districts { get; }
+        public IDistrictFilialRepositorie DistrictFilials { get; }
+        public IOrderRepositorie Orders { get; }
+        public IOrderDetailRepositorie OrderDetails { get; }
+        public IRecevingOperatorRepositorie RecevingOperators { get; }
+        public ITypeFastFoodRepositorie TypeFastFoods { get; }
         public Task<int> SaveChangeAsync();
     }
 }
