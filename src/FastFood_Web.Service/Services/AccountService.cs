@@ -6,6 +6,8 @@ using FastFood_Web.Service.Dtos.AccountDto;
 using FastFood_Web.Service.Helpers;
 using FastFood_Web.Service.Interfaces;
 using FastFood_Web.Service.Interfaces.Common;
+using FastFood_Web.Service.ViewModels.Helpers;
+using Microsoft.Extensions.Caching.Memory;
 using System.Net;
 
 namespace FastFood_Web.Service.Services
@@ -14,11 +16,15 @@ namespace FastFood_Web.Service.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAuthManager _authManager;
+        private readonly IMemoryCache _memoryCache;
+        private readonly IEmailService _emailService;
 
-        public AccountService(IUnitOfWork unitOfWork, IAuthManager authManager)
+        public AccountService(IUnitOfWork unitOfWork, IAuthManager authManager,IMemoryCache memoryCache, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _authManager = authManager;
+            _memoryCache = memoryCache;
+            _emailService = emailService;
         }
 
         public async Task<string> LoginAsync(AccountLoginDto accountLogin)
@@ -68,9 +74,24 @@ namespace FastFood_Web.Service.Services
             return result > 0;
         }
 
+
+
         public async Task SendCodeAsync(SendToEmailDto sendToEmail)
         {
-            
+            int code = new Random().Next(100000, 999999);
+
+            _memoryCache.Set(sendToEmail.Email, code, TimeSpan.FromMinutes(10));
+
+            var message = new EmailMessage()
+            {
+                To = sendToEmail.Email,
+                Subject = "Verification code",
+                Body = code.ToString()
+            };
+
+            await _emailService.SendAsync(message);
         }
+
+
     }
 }
