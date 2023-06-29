@@ -21,5 +21,6 @@ namespace FastFood_Web.DataAccess.DbContexts
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = default!;
         public virtual DbSet<ReceivingOperator> ReceivingOperators { get; set; } = default!;
         public virtual DbSet<TypeFastFood> TypeFastFoods { get; set; } = default!;
+        public virtual DbSet<User> Users { get; set; } = default!;
     }
 }

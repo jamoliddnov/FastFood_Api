@@ -16,7 +16,7 @@ namespace FastFood_Web.Api.Confegurations.LayerConfigurations
             serviceDescriptors.AddScoped<IAccountSevrice, AccountService>();
             serviceDescriptors.AddScoped<IEmailService, EmailService>();
             serviceDescriptors.AddScoped<IAuthManager, AuthManager>();
-            
+
             serviceDescriptors.AddAutoMapper(typeof(MappingConfiguration));
         }
     }

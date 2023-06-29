@@ -1,9 +1,7 @@
 ﻿using FastFood_Web.DataAccess.Interfaces.Common;
-using FastFood_Web.Domain.Entities;
 using FastFood_Web.Service.Common.Exceptions;
 using FastFood_Web.Service.Common.Security;
 using FastFood_Web.Service.Dtos.AccountDto;
-using FastFood_Web.Service.Helpers;
 using FastFood_Web.Service.Interfaces;
 using FastFood_Web.Service.Interfaces.Common;
 using FastFood_Web.Service.ViewModels.Helpers;
@@ -19,7 +17,7 @@ namespace FastFood_Web.Service.Services
         private readonly IMemoryCache _memoryCache;
         private readonly IEmailService _emailService;
 
-        public AccountService(IUnitOfWork unitOfWork, IAuthManager authManager,IMemoryCache memoryCache, IEmailService emailService)
+        public AccountService(IUnitOfWork unitOfWork, IAuthManager authManager, IMemoryCache memoryCache, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _authManager = authManager;
@@ -35,16 +33,18 @@ namespace FastFood_Web.Service.Services
                 throw new StatusCodeException(HttpStatusCode.NotFound, "User not found, Email is incorrect");
             }
 
-            var userPassword = PassowrdHasher.Verify(accountLogin.Password, emailResult.Salt, emailResult.PasswordHash);
+            //var userPassword = PassowrdHasher.Verify(accountLogin.Password, emailResult.Salt, emailResult.PasswordHash);
 
-            if (userPassword)
-            {
-                return _authManager.GenerateToken(emailResult);
-            }
-            else
-            {
-                throw new StatusCodeException(HttpStatusCode.BadRequest, "Password is wrong!");
-            }
+            //if (userPassword)
+            //{
+            //    return _authManager.GenerateToken(emailResult);
+            //}
+            //else
+            //{
+            //    throw new StatusCodeException(HttpStatusCode.BadRequest, "Password is wrong!");
+            //}
+
+            return "";
         }
 
         public async Task<bool> RegisterAsync(AccountRegisterDto accountCreate)
@@ -55,20 +55,20 @@ namespace FastFood_Web.Service.Services
                 throw new StatusCodeException(HttpStatusCode.Conflict, "Email alredy exist");
             }
 
-            var phoneNumber = await _unitOfWork.Customers.FirstOrDefaultAsync(x => x.PhoneNumber == accountCreate.PhoneNumber);
-            if (phoneNumber is not null)
-            {
-                throw new StatusCodeException(HttpStatusCode.Conflict, "Phone number alredy exist");
-            }
+            //var phoneNumber = await _unitOfWork.Customers.FirstOrDefaultAsync(x => x.PhoneNumber == accountCreate.PhoneNumber);
+            //if (phoneNumber is not null)
+            //{
+            //    throw new StatusCodeException(HttpStatusCode.Conflict, "Phone number alredy exist");
+            //}
 
             var passwordResult = PassowrdHasher.Hash(accountCreate.Password);
 
-            var customer = (Customer)accountCreate;
-            customer.PasswordHash = passwordResult.PasswordHash;
-            customer.Salt = passwordResult.Salt;
-            customer.CreateAt = TimeHelpers.GetCurrentServerTime();
 
-            _unitOfWork.Customers.Add(customer);
+            //customer.PasswordHash = passwordResult.PasswordHash;
+            //customer.Salt = passwordResult.Salt;
+            //customer.CreateAt = TimeHelpers.GetCurrentServerTime();
+
+            //_unitOfWork.Customers.Add(customer);
 
             var result = await _unitOfWork.SaveChangeAsync();
             return result > 0;
