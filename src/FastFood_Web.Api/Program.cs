@@ -11,6 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDataAccess(builder.Configuration);
 
 builder.Services.AddService();
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
