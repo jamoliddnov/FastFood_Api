@@ -1,5 +1,4 @@
-﻿using FastFood_Web.Domain.Entities;
-using FastFood_Web.Service.Dtos.AccountDto;
+﻿using FastFood_Web.Service.Dtos.AccountDto;
 
 namespace FastFood_Web.Service.Interfaces
 {

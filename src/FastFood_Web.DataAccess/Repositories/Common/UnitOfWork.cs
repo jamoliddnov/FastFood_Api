@@ -27,6 +27,8 @@ namespace FastFood_Web.DataAccess.Repositories.Common
 
         public ITypeFastFoodRepositorie TypeFastFoods { get; }
 
+        public IUserRepositorie UserRepositories { get; }
+
         public UnitOfWork(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -40,6 +42,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
             OrderDetails = new OrderDetailRepositorie(appDbContext);
             RecevingOperators = new RecevingOperatorRepositorie(appDbContext);
             TypeFastFoods = new TypeFastFoodRepositorie(appDbContext);
+            UserRepositories = new UserRepositorie(appDbContext);
         }
 
         public async Task<int> SaveChangeAsync()
