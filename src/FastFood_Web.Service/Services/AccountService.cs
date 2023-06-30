@@ -1,12 +1,16 @@
 ﻿using FastFood_Web.DataAccess.Interfaces.Common;
+using FastFood_Web.Domain.Entities;
 using FastFood_Web.Service.Common.Exceptions;
 using FastFood_Web.Service.Common.Security;
 using FastFood_Web.Service.Dtos.AccountDto;
+using FastFood_Web.Service.Helpers;
 using FastFood_Web.Service.Interfaces;
 using FastFood_Web.Service.Interfaces.Common;
 using FastFood_Web.Service.ViewModels.Helpers;
 using Microsoft.Extensions.Caching.Memory;
 using System.Net;
+
+#pragma warning disable
 
 namespace FastFood_Web.Service.Services
 {
@@ -33,18 +37,18 @@ namespace FastFood_Web.Service.Services
                 throw new StatusCodeException(HttpStatusCode.NotFound, "User not found, Email is incorrect");
             }
 
-            //var userPassword = PassowrdHasher.Verify(accountLogin.Password, emailResult.Salt, emailResult.PasswordHash);
+            var userResult = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.Id == emailResult.UserId);
 
-            //if (userPassword)
-            //{
-            //    return _authManager.GenerateToken(emailResult);
-            //}
-            //else
-            //{
-            //    throw new StatusCodeException(HttpStatusCode.BadRequest, "Password is wrong!");
-            //}
+            var userPassword = PassowrdHasher.Verify(accountLogin.Password, userResult.Salt, userResult.PasswordHash);
 
-            return "";
+            if (userPassword)
+            {
+                return _authManager.GenerateToken(emailResult);
+            }
+            else
+            {
+                throw new StatusCodeException(HttpStatusCode.BadRequest, "Password is wrong!");
+            }
         }
 
         public async Task<bool> RegisterAsync(AccountRegisterDto accountCreate)
@@ -55,20 +59,24 @@ namespace FastFood_Web.Service.Services
                 throw new StatusCodeException(HttpStatusCode.Conflict, "Email alredy exist");
             }
 
-            //var phoneNumber = await _unitOfWork.Customers.FirstOrDefaultAsync(x => x.PhoneNumber == accountCreate.PhoneNumber);
-            //if (phoneNumber is not null)
-            //{
-            //    throw new StatusCodeException(HttpStatusCode.Conflict, "Phone number alredy exist");
-            //}
+            var phoneNumber = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.PhoneNumber == accountCreate.PhoneNumber);
+            if (phoneNumber is not null)
+            {
+                throw new StatusCodeException(HttpStatusCode.Conflict, "Phone number alredy exist");
+            }
 
             var passwordResult = PassowrdHasher.Hash(accountCreate.Password);
 
+            var user = (User)accountCreate;
+            user.CreateAt = TimeHelpers.GetCurrentServerTime();
+            user.Salt = passwordResult.Salt;
+            user.PasswordHash = passwordResult.PasswordHash;
 
-            //customer.PasswordHash = passwordResult.PasswordHash;
-            //customer.Salt = passwordResult.Salt;
-            //customer.CreateAt = TimeHelpers.GetCurrentServerTime();
+            _unitOfWork.Users.Add(user);
 
-            //_unitOfWork.Customers.Add(customer);
+            var customer = (Customer)accountCreate;
+            customer.UserId = user.Id;
+            _unitOfWork.Customers.Add(customer);
 
             var result = await _unitOfWork.SaveChangeAsync();
             return result > 0;

@@ -1,7 +1,9 @@
-﻿namespace FastFood_Web.Domain.Common
+﻿using System.Data.SqlTypes;
+
+namespace FastFood_Web.Domain.Common
 {
     public class Base
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
     }
 }

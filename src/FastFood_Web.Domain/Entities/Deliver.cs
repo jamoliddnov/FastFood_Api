@@ -9,9 +9,9 @@ namespace FastFood_Web.Domain.Entities
         public string CarNumber { get; set; } = String.Empty;
         public string ImagePath { get; set; } = String.Empty;
         public UserRole UserRole { get; set; } = UserRole.Deliver;
-        public Guid DistrictFilialId { get; set; }
+        public string DistrictFilialId { get; set; } = String.Empty;
         public virtual DistrictFilial DistrictFilial { get; set; } = default!;
-        public Guid UserId { get; set; }
+        public string UserId { get; set; } = String.Empty;
         public virtual User User { get; set; } = default!;
     }
 }

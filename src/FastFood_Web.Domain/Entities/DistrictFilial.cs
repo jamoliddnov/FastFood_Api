@@ -8,7 +8,7 @@ namespace FastFood_Web.Domain.Entities
         public string ImagePath { get; set; } = String.Empty;
         public string Location { get; set; } = String.Empty;
         public DateTime DateTime { get; set; }
-        public Guid DistrictId { get; set; }
+        public string DistrictId { get; set; } = String.Empty;
         public virtual District District { get; set; } = default!;
     }
 }

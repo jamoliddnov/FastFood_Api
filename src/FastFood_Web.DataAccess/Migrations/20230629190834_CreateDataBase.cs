@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -12,7 +13,7 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "CategoryFastFoods",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     CategoryName = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -24,7 +25,7 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "Districts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     DistrictName = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -33,10 +34,10 @@ namespace FastFood_Web.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     FullName = table.Column<string>(type: "text", nullable: false),
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
@@ -45,19 +46,19 @@ namespace FastFood_Web.DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "TypeFastFoods",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     ImagePath = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
                     FastFoodVolume = table.Column<int>(type: "integer", nullable: false),
-                    CategoryFastFoodId = table.Column<Guid>(type: "uuid", nullable: false)
+                    CategoryFastFoodId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,12 +75,12 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "DistrictFilials",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     DistrictFilialName = table.Column<string>(type: "text", nullable: false),
                     ImagePath = table.Column<string>(type: "text", nullable: false),
                     Location = table.Column<string>(type: "text", nullable: false),
                     DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DistrictId = table.Column<Guid>(type: "uuid", nullable: false)
+                    DistrictId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,17 +97,17 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "AllocationOperators",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     UserRole = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AllocationOperators", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AllocationOperators_User_UserId",
+                        name: "FK_AllocationOperators_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -115,20 +116,20 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     IsDeleteProfile = table.Column<bool>(type: "boolean", nullable: false),
                     Canceled = table.Column<byte>(type: "smallint", nullable: false),
                     UserRole = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Customers_User_UserId",
+                        name: "FK_Customers_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -137,13 +138,13 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "Delivers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     CarModel = table.Column<string>(type: "text", nullable: false),
                     CarNumber = table.Column<string>(type: "text", nullable: false),
                     ImagePath = table.Column<string>(type: "text", nullable: false),
                     UserRole = table.Column<int>(type: "integer", nullable: false),
-                    DistrictFilialId = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                    DistrictFilialId = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,9 +156,9 @@ namespace FastFood_Web.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Delivers_User_UserId",
+                        name: "FK_Delivers_Users_UserId",
                         column: x => x.UserId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -166,9 +167,9 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "ReceivingOperators",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     UserRole = table.Column<int>(type: "integer", nullable: false),
-                    DistrictFilialId = table.Column<Guid>(type: "uuid", nullable: false)
+                    DistrictFilialId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -185,7 +186,7 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     TotalSum = table.Column<double>(type: "double precision", nullable: false),
                     Location = table.Column<string>(type: "text", nullable: false),
@@ -194,9 +195,9 @@ namespace FastFood_Web.DataAccess.Migrations
                     UpdateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ProcessStatus = table.Column<int>(type: "integer", nullable: false),
                     PaymentType = table.Column<int>(type: "integer", nullable: false),
-                    ReceivingOperatorId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
-                    DeliverId = table.Column<Guid>(type: "uuid", nullable: false)
+                    ReceivingOperatorId = table.Column<string>(type: "text", nullable: false),
+                    CustomerId = table.Column<string>(type: "text", nullable: false),
+                    DeliverId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,9 +226,9 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "OrderDetails",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TypeFastFoodId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    OrderId = table.Column<string>(type: "text", nullable: false),
+                    TypeFastFoodId = table.Column<string>(type: "text", nullable: false),
                     Amount = table.Column<byte>(type: "smallint", nullable: false),
                     Price = table.Column<double>(type: "double precision", nullable: false)
                 },
@@ -336,7 +337,7 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "CategoryFastFoods");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "DistrictFilials");

@@ -9,6 +9,7 @@ namespace FastFood_Web.Api.Confegurations.LayerConfigurations
         public MappingConfiguration()
         {
             CreateMap<AccountRegisterDto, Customer>();
+            CreateMap<AccountRegisterDto, User>();
         }
     }
 }

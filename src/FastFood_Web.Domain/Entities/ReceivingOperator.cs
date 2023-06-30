@@ -6,7 +6,7 @@ namespace FastFood_Web.Domain.Entities
     public class ReceivingOperator : Base
     {
         public UserRole UserRole { get; set; } = UserRole.ReceivingOperator;
-        public Guid DistrictFilialId { get; set; }
+        public string DistrictFilialId { get; set; } = String.Empty;
         public virtual DistrictFilial DistrictFilial { get; set; } = default!;
     }
 }
