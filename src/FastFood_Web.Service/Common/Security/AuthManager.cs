@@ -16,7 +16,7 @@ namespace FastFood_Web.Service.Common.Security
             _configuration = configuration.GetSection("Jwt");
         }
 
-        public string GenerateToken(Customer customer)
+        public string GenerateToken(User customer)
         {
             var claims = new[] {
                 new Claim("Id", customer.Id.ToString()),

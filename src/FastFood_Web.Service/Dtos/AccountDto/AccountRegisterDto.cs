@@ -15,18 +15,11 @@ namespace FastFood_Web.Service.Dtos.AccountDto
         [Required, PasswordAttribute]
         public string Password { get; set; } = String.Empty;
 
-        public static implicit operator Customer(AccountRegisterDto registerDto)
-        {
-            return new Customer()
-            {
-                Email = registerDto.Email,
-            };
-        }
-
         public static implicit operator User(AccountRegisterDto accountRegister)
         {
             return new User()
             {
+                Email = accountRegister.Email,
                 FullName = accountRegister.FullName,
                 PhoneNumber = accountRegister.PhoneNumber,
                 PasswordHash = accountRegister.Password

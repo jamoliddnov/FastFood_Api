@@ -1,4 +1,5 @@
 ﻿using FastFood_Web.DataAccess.Interfaces.Common;
+using FastFood_Web.DataAccess.Repositories.Common;
 using FastFood_Web.Domain.Entities;
 using FastFood_Web.Service.Common.Exceptions;
 using FastFood_Web.Service.Common.Security;
@@ -31,15 +32,15 @@ namespace FastFood_Web.Service.Services
 
         public async Task<string> LoginAsync(AccountLoginDto accountLogin)
         {
-            var emailResult = await _unitOfWork.Customers.FirstOrDefaultAsync(x => x.Email == accountLogin.Email);
+            var emailResult = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.Email == accountLogin.Email);
             if (emailResult is null)
             {
                 throw new StatusCodeException(HttpStatusCode.NotFound, "User not found, Email is incorrect");
             }
 
-            var userResult = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.Id == emailResult.UserId);
+           
 
-            var userPassword = PassowrdHasher.Verify(accountLogin.Password, userResult.Salt, userResult.PasswordHash);
+            var userPassword = PassowrdHasher.Verify(accountLogin.Password, emailResult.Salt, emailResult.PasswordHash);
 
             if (userPassword)
             {
@@ -53,7 +54,7 @@ namespace FastFood_Web.Service.Services
 
         public async Task<bool> RegisterAsync(AccountRegisterDto accountCreate)
         {
-            var emailResult = await _unitOfWork.Customers.FirstOrDefaultAsync(x => x.Email == accountCreate.Email);
+            var emailResult = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.Email == accountCreate.Email);
             if (emailResult is not null)
             {
                 throw new StatusCodeException(HttpStatusCode.Conflict, "Email alredy exist");
@@ -74,7 +75,7 @@ namespace FastFood_Web.Service.Services
 
             _unitOfWork.Users.Add(user);
 
-            var customer = (Customer)accountCreate;
+            Customer customer = new Customer();
             customer.UserId = user.Id;
             _unitOfWork.Customers.Add(customer);
 
@@ -98,6 +99,55 @@ namespace FastFood_Web.Service.Services
             };
 
             await _emailService.SendAsync(message);
+        }
+
+        public async Task<bool> UpdatePasswordAsync(PasswordUpdateDto updateDto)
+        {
+            //var user = await _unitOfWork.Users
+            return false;
+        }
+
+    //    var user = await _unitOfWork.Users.FindByIdAsync(1);
+
+    //        if (user is null)
+    //        {
+    //            throw new StatusCodeException(HttpStatusCode.NotFound, "User not found");
+    //}
+    //        else
+    //        {
+    //            var passwordresult = PasswordHasher.Hash(dto.Password);
+
+    //user.PasswordHash = passwordresult.PasswordHash;
+    //            user.Salt = passwordresult.Salt;
+    //            _unitOfWork.Users.Update(user.Id, user);
+    //            var result = await _unitOfWork.SaveChangesAsync();
+    //            return result > 0;
+    //        }
+
+public async Task<bool> VerifyResetPasswordAsync(UserResetPasswordDto resetPasswordDto)
+        {
+            var userResult = await _unitOfWork.Users.GetByEmailAsync(resetPasswordDto.Email);
+
+            if (userResult is null)
+            {
+                throw new StatusCodeException(HttpStatusCode.NotFound, "User not found");
+            }
+            if (_memoryCache.TryGetValue(resetPasswordDto.Email, out int exceptionCode) is false)
+            {
+                throw new StatusCodeException(HttpStatusCode.BadRequest, "Code is expired");
+            }
+            if (exceptionCode != resetPasswordDto.Code)
+            {
+                throw new StatusCodeException(HttpStatusCode.BadRequest, "Code is wrong");
+            }
+
+            var newPassword = PassowrdHasher.Hash(resetPasswordDto.Password);
+            userResult.PasswordHash = newPassword.PasswordHash;
+            userResult.Salt = newPassword.Salt;
+            _unitOfWork.Users.Update(userResult, userResult.Id);
+
+            var result = await _unitOfWork.SaveChangeAsync();
+            return result > 0;
         }
 
 
