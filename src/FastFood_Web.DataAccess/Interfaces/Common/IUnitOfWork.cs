@@ -12,7 +12,7 @@
         public IOrderDetailRepositorie OrderDetails { get; }
         public IRecevingOperatorRepositorie RecevingOperators { get; }
         public ITypeFastFoodRepositorie TypeFastFoods { get; }
-        public IUserRepositorie UserRepositories { get; }
+        public IUserRepositorie Users { get; }
         public Task<int> SaveChangeAsync();
     }
 }

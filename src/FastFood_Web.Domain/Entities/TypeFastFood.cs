@@ -9,7 +9,7 @@ namespace FastFood_Web.Domain.Entities
         public string ImagePath { get; set; } = String.Empty;
         public float Price { get; set; }
         public FastFoodVolume FastFoodVolume { get; set; }
-        public Guid CategoryFastFoodId { get; set; }
+        public string CategoryFastFoodId { get; set; } = String.Empty;
         public virtual CategoryFastFood CategoryFastFood { get; set; } = default!;
     }
 }

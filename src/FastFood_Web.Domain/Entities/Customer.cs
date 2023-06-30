@@ -9,7 +9,7 @@ namespace FastFood_Web.Domain.Entities
         public bool IsDeleteProfile { get; set; } = false;
         public byte Canceled { get; set; } = 0;
         public UserRole UserRole { get; set; } = UserRole.Customer;
-        public Guid UserId { get; set; }
+        public string UserId { get; set; } = String.Empty;
         public virtual User User { get; set; } = default!;
     }
 }

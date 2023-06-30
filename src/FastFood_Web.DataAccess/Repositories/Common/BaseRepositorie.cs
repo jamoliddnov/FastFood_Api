@@ -32,11 +32,11 @@ namespace FastFood_Web.DataAccess.Repositories.Common
             }
         }
 
-        public virtual void Delete(Guid guid)
+        public virtual void Delete(string id)
         {
             try
             {
-                var entity = _dbSet.Find(guid);
+                var entity = _dbSet.Find(id);
 
                 if (entity is not null)
                 {
@@ -49,11 +49,11 @@ namespace FastFood_Web.DataAccess.Repositories.Common
             }
         }
 
-        public virtual async Task<T?> FindByIdAsync(Guid guid)
+        public virtual async Task<T?> FindByIdAsync(string id)
         {
             try
             {
-                return await _dbSet.FindAsync(guid);
+                return await _dbSet.FindAsync(id);
             }
             catch
             {
@@ -85,11 +85,11 @@ namespace FastFood_Web.DataAccess.Repositories.Common
             }
         }
 
-        public virtual void Update(T entity, Guid guid)
+        public virtual void Update(T entity, string id)
         {
             try
             {
-                entity.Id = guid;
+                entity.Id = id;
                 _dbSet.Update(entity);
             }
             catch
