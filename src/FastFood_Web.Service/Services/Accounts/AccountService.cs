@@ -5,7 +5,6 @@ using FastFood_Web.Service.Common.Exceptions;
 using FastFood_Web.Service.Common.Security;
 using FastFood_Web.Service.Dtos.AccountDto;
 using FastFood_Web.Service.Helpers;
-using FastFood_Web.Service.Interfaces;
 using FastFood_Web.Service.Interfaces.Accounts;
 using FastFood_Web.Service.Interfaces.Common;
 using FastFood_Web.Service.ViewModels.Helpers;
@@ -87,9 +86,7 @@ namespace FastFood_Web.Service.Services.Accounts
             return result > 0;
         }
 
-
-
-        public async Task SendCodeAsync(SendToEmailDto sendToEmail)
+        public async Task SendCodeAsync(SendCodeToEmailDto sendToEmail)
         {
             int code = new Random().Next(100000, 999999);
 

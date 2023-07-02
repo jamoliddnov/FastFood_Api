@@ -14,7 +14,7 @@ namespace FastFood_Web.Service.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAuthManager _authManager;
 
-        public AdminService( IUnitOfWork unitOfWork, IAuthManager authManager)
+        public AdminService(IUnitOfWork unitOfWork, IAuthManager authManager)
         {
             _unitOfWork = unitOfWork;
             _authManager = authManager;
