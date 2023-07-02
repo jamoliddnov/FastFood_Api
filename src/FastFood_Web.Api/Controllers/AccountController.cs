@@ -1,5 +1,6 @@
 ﻿using FastFood_Web.Service.Dtos.AccountDto;
 using FastFood_Web.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastFood_Web.Api.Controllers
@@ -16,10 +17,12 @@ namespace FastFood_Web.Api.Controllers
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> LoginAsync([FromForm] AccountLoginDto accountLoginDto)
         {
             return Ok(await _accountSevrice.LoginAsync(accountLoginDto));
         }
+
 
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsynv([FromForm] AccountRegisterDto accountRegisterDto)
@@ -27,12 +30,24 @@ namespace FastFood_Web.Api.Controllers
             return Ok(await _accountSevrice.RegisterAsync(accountRegisterDto));
         }
 
-        [HttpPost("sendEmail")]
-        public async Task<IActionResult> SendEmail([FromForm] SendToEmailDto sendToEmail)
+        [HttpPost("send-to-Email")]
+        public async Task<IActionResult> SendToEmail([FromForm] SendToEmailDto sendToEmail)
         {
             await _accountSevrice.SendCodeAsync(sendToEmail);
             return Ok();
         }
+
+        //[HttpPatch("email-Verify")]
+        //public async Task<IActionResult> UpdatePassword([FromForm] EmailVerifyDto updateDto)
+        //{
+        //    return Ok(await _accountSevrice.VerifyResetPasswordAsync(updateDto));
+        //}
+
+        //[HttpPost("reset-Password")]
+        //public async Task<IActionResult> VerifyEmailAsync([FromForm] ResetPasswordDto userReset)
+        //{
+        //    return Ok(await _accountSevrice.UpdatePasswordAsync(userReset));
+        //}
 
 
     }

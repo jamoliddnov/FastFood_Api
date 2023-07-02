@@ -12,11 +12,12 @@ namespace FastFood_Web.Api.Confegurations.LayerConfigurations
     {
         public static void AddService(this IServiceCollection serviceDescriptors)
         {
+            serviceDescriptors.AddHttpContextAccessor();
             serviceDescriptors.AddScoped<IUnitOfWork, UnitOfWork>();
             serviceDescriptors.AddScoped<IAccountSevrice, AccountService>();
             serviceDescriptors.AddScoped<IEmailService, EmailService>();
             serviceDescriptors.AddScoped<IAuthManager, AuthManager>();
-
+            serviceDescriptors.AddScoped<IIdentityService, IdentityService>();
             serviceDescriptors.AddAutoMapper(typeof(MappingConfiguration));
         }
     }

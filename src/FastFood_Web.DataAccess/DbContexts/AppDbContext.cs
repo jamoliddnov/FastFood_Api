@@ -1,4 +1,9 @@
-﻿using FastFood_Web.Domain.Entities;
+﻿using FastFood_Web.Domain.Entities.Customers;
+using FastFood_Web.Domain.Entities.Districts;
+using FastFood_Web.Domain.Entities.Empolyees;
+using FastFood_Web.Domain.Entities.Orders;
+using FastFood_Web.Domain.Entities.Products;
+using FastFood_Web.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace FastFood_Web.DataAccess.DbContexts
@@ -11,6 +16,7 @@ namespace FastFood_Web.DataAccess.DbContexts
 
         }
 
+        public virtual DbSet<Admin> Admins { get; set; } = default!;
         public virtual DbSet<AllocationOperator> AllocationOperators { get; set; } = default!;
         public virtual DbSet<CategoryFastFood> CategoryFastFoods { get; set; } = default!;
         public virtual DbSet<Customer> Customers { get; set; } = default!;
@@ -22,5 +28,10 @@ namespace FastFood_Web.DataAccess.DbContexts
         public virtual DbSet<ReceivingOperator> ReceivingOperators { get; set; } = default!;
         public virtual DbSet<TypeFastFood> TypeFastFoods { get; set; } = default!;
         public virtual DbSet<User> Users { get; set; } = default!;
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+        }
     }
 }

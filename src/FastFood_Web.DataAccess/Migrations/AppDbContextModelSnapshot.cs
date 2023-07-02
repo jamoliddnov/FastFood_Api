@@ -22,37 +22,7 @@ namespace FastFood_Web.DataAccess.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.AllocationOperator", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AllocationOperators");
-                });
-
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.CategoryFastFood", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CategoryFastFoods");
-                });
-
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Customers.Customer", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -74,7 +44,97 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.Deliver", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Districts.District", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DistrictName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Districts");
+                });
+
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Districts.DistrictFilial", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DistrictFilialName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("DistrictId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("DistrictFilials");
+                });
+
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Empolyees.Admin", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserRole")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admins");
+                });
+
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Empolyees.AllocationOperator", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AllocationOperators");
+                });
+
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Empolyees.Deliver", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -108,52 +168,23 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.ToTable("Delivers");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.District", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Empolyees.ReceivingOperator", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<string>("DistrictName")
+                    b.Property<string>("DistrictFilialId")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Districts");
+                    b.HasIndex("DistrictFilialId");
+
+                    b.ToTable("ReceivingOperators");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.DistrictFilial", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("DateTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("DistrictFilialName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("DistrictId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Location")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DistrictId");
-
-                    b.ToTable("DistrictFilials");
-                });
-
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.Order", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Orders.Order", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -207,7 +238,7 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.OrderDetail", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Orders.OrderDetail", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -235,23 +266,21 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.ReceivingOperator", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Products.CategoryFastFood", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<string>("DistrictFilialId")
+                    b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DistrictFilialId");
-
-                    b.ToTable("ReceivingOperators");
+                    b.ToTable("CategoryFastFoods");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.TypeFastFood", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Products.TypeFastFood", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -281,7 +310,7 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.ToTable("TypeFastFoods");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.User", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Users.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -317,9 +346,9 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.AllocationOperator", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Customers.Customer", b =>
                 {
-                    b.HasOne("FastFood_Web.Domain.Entities.User", "User")
+                    b.HasOne("FastFood_Web.Domain.Entities.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -328,9 +357,20 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.Customer", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Districts.DistrictFilial", b =>
                 {
-                    b.HasOne("FastFood_Web.Domain.Entities.User", "User")
+                    b.HasOne("FastFood_Web.Domain.Entities.Districts.District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("District");
+                });
+
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Empolyees.AllocationOperator", b =>
+                {
+                    b.HasOne("FastFood_Web.Domain.Entities.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -339,15 +379,15 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.Deliver", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Empolyees.Deliver", b =>
                 {
-                    b.HasOne("FastFood_Web.Domain.Entities.DistrictFilial", "DistrictFilial")
+                    b.HasOne("FastFood_Web.Domain.Entities.Districts.DistrictFilial", "DistrictFilial")
                         .WithMany()
                         .HasForeignKey("DistrictFilialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FastFood_Web.Domain.Entities.User", "User")
+                    b.HasOne("FastFood_Web.Domain.Entities.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -358,32 +398,32 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.DistrictFilial", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Empolyees.ReceivingOperator", b =>
                 {
-                    b.HasOne("FastFood_Web.Domain.Entities.District", "District")
+                    b.HasOne("FastFood_Web.Domain.Entities.Districts.DistrictFilial", "DistrictFilial")
                         .WithMany()
-                        .HasForeignKey("DistrictId")
+                        .HasForeignKey("DistrictFilialId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("District");
+                    b.Navigation("DistrictFilial");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.Order", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Orders.Order", b =>
                 {
-                    b.HasOne("FastFood_Web.Domain.Entities.Customer", "Customer")
+                    b.HasOne("FastFood_Web.Domain.Entities.Customers.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FastFood_Web.Domain.Entities.Deliver", "Deliver")
+                    b.HasOne("FastFood_Web.Domain.Entities.Empolyees.Deliver", "Deliver")
                         .WithMany()
                         .HasForeignKey("DeliverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FastFood_Web.Domain.Entities.ReceivingOperator", "ReceivingOperator")
+                    b.HasOne("FastFood_Web.Domain.Entities.Empolyees.ReceivingOperator", "ReceivingOperator")
                         .WithMany()
                         .HasForeignKey("ReceivingOperatorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -396,15 +436,15 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.Navigation("ReceivingOperator");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.OrderDetail", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Orders.OrderDetail", b =>
                 {
-                    b.HasOne("FastFood_Web.Domain.Entities.Order", "Order")
+                    b.HasOne("FastFood_Web.Domain.Entities.Orders.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FastFood_Web.Domain.Entities.TypeFastFood", "TypeFastFood")
+                    b.HasOne("FastFood_Web.Domain.Entities.Products.TypeFastFood", "TypeFastFood")
                         .WithMany()
                         .HasForeignKey("TypeFastFoodId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -415,20 +455,9 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.Navigation("TypeFastFood");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.ReceivingOperator", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Products.TypeFastFood", b =>
                 {
-                    b.HasOne("FastFood_Web.Domain.Entities.DistrictFilial", "DistrictFilial")
-                        .WithMany()
-                        .HasForeignKey("DistrictFilialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DistrictFilial");
-                });
-
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.TypeFastFood", b =>
-                {
-                    b.HasOne("FastFood_Web.Domain.Entities.CategoryFastFood", "CategoryFastFood")
+                    b.HasOne("FastFood_Web.Domain.Entities.Products.CategoryFastFood", "CategoryFastFood")
                         .WithMany()
                         .HasForeignKey("CategoryFastFoodId")
                         .OnDelete(DeleteBehavior.Cascade)

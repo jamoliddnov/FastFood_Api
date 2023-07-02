@@ -1,4 +1,7 @@
+using FastFood_Web.Api.Confegurations;
 using FastFood_Web.Api.Confegurations.LayerConfigurations;
+using FastFood_Web.Api.Middlewares;
+using FastFood_Web.Service.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,9 +12,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDataAccess(builder.Configuration);
-
 builder.Services.AddService();
 builder.Services.AddMemoryCache();
+
+builder.ConfigureAuth();
+builder.Services.ConfigureSwaggerAuthorize();
+
+
 
 var app = builder.Build();
 
@@ -22,8 +29,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (app.Services.GetService<IHttpContextAccessor>() != null)
+{
+    HttpContextHelper.Accessor = app.Services.GetRequiredService<IHttpContextAccessor>();
+}
+else
+{
 
+}
+
+app.UseMiddleware<TokenRedirectMiddleware>();
+
+
+app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
