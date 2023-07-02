@@ -1,4 +1,4 @@
-﻿using FastFood_Web.Domain.Entities;
+﻿using FastFood_Web.Domain.Entities.Users;
 using FastFood_Web.Service.Interfaces.Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

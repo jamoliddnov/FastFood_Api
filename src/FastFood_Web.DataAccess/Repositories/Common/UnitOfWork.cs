@@ -1,6 +1,7 @@
 ﻿using FastFood_Web.DataAccess.DbContexts;
 using FastFood_Web.DataAccess.Interfaces;
 using FastFood_Web.DataAccess.Interfaces.Common;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace FastFood_Web.DataAccess.Repositories.Common
 {
@@ -8,6 +9,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
     {
         private AppDbContext _appDbContext;
 
+        public IAdminRepositorie AdminRepositories { get; }
         public IAllocationOperatorRepositore AllocationOperators { get; }
 
         public ICategoryFastFoodRepositorie CategoryFastFoods { get; }
@@ -32,6 +34,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
         public UnitOfWork(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
+            AdminRepositories = new AdminRepositorie(appDbContext);
             AllocationOperators = new AllocationOperatorRepositorie(appDbContext);
             CategoryFastFoods = new CategoryFastFoodRepositorie(appDbContext);
             Customers = new CustomerRepositorie(appDbContext);
@@ -43,6 +46,11 @@ namespace FastFood_Web.DataAccess.Repositories.Common
             RecevingOperators = new RecevingOperatorRepositorie(appDbContext);
             TypeFastFoods = new TypeFastFoodRepositorie(appDbContext);
             Users = new UserRepositorie(appDbContext);
+        }
+
+        public EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
+        {
+            return _appDbContext.Entry(entity);
         }
 
         public async Task<int> SaveChangeAsync()

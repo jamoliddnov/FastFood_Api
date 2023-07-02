@@ -5,6 +5,7 @@
         Customer = 0,
         AllocationOperator = 1,
         ReceivingOperator = 2,
-        Deliver = 3
+        Deliver = 3,
+        Admin = 4,
     }
 }

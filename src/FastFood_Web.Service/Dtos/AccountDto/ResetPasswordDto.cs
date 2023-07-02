@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FastFood_Web.Service.Dtos.AccountDto
 {
-    public class UserResetPasswordDto
+    public class ResetPasswordDto
     {
-        [Required(ErrorMessage ="Email is required!"),EmailAttribute]
+        [Required(ErrorMessage = "Email is required!"), EmailAttribute]
         public string Email { get; set; } = String.Empty;
         [Required]
         public int Code { get; set; }

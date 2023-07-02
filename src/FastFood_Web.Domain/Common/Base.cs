@@ -1,6 +1,4 @@
-﻿using System.Data.SqlTypes;
-
-namespace FastFood_Web.Domain.Common
+﻿namespace FastFood_Web.Domain.Common
 {
     public class Base
     {

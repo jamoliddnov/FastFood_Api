@@ -1,7 +1,10 @@
-﻿namespace FastFood_Web.DataAccess.Interfaces.Common
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+
+namespace FastFood_Web.DataAccess.Interfaces.Common
 {
     public interface IUnitOfWork
     {
+        public IAdminRepositorie AdminRepositories { get; }
         public IAllocationOperatorRepositore AllocationOperators { get; }
         public ICategoryFastFoodRepositorie CategoryFastFoods { get; }
         public ICustomerRepositorie Customers { get; }
@@ -13,6 +16,8 @@
         public IRecevingOperatorRepositorie RecevingOperators { get; }
         public ITypeFastFoodRepositorie TypeFastFoods { get; }
         public IUserRepositorie Users { get; }
+
+        public EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
         public Task<int> SaveChangeAsync();
     }
 }

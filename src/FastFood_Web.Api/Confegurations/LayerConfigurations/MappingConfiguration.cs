@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using FastFood_Web.Domain.Entities;
+using FastFood_Web.Domain.Entities.Customers;
+using FastFood_Web.Domain.Entities.Users;
 using FastFood_Web.Service.Dtos.AccountDto;
 
 namespace FastFood_Web.Api.Confegurations.LayerConfigurations
