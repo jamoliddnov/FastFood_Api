@@ -6,6 +6,7 @@ using FastFood_Web.Service.Common.Security;
 using FastFood_Web.Service.Dtos.AccountDto;
 using FastFood_Web.Service.Helpers;
 using FastFood_Web.Service.Interfaces;
+using FastFood_Web.Service.Interfaces.Accounts;
 using FastFood_Web.Service.Interfaces.Common;
 using FastFood_Web.Service.ViewModels.Helpers;
 using Microsoft.Extensions.Caching.Memory;
@@ -13,7 +14,7 @@ using System.Net;
 
 #pragma warning disable
 
-namespace FastFood_Web.Service.Services
+namespace FastFood_Web.Service.Services.Accounts
 {
     public class AccountService : IAccountSevrice
     {

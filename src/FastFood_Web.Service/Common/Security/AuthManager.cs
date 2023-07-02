@@ -1,4 +1,5 @@
-﻿using FastFood_Web.Domain.Entities.Users;
+﻿using FastFood_Web.Domain.Entities.Empolyees;
+using FastFood_Web.Domain.Entities.Users;
 using FastFood_Web.Service.Interfaces.Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -17,6 +18,24 @@ namespace FastFood_Web.Service.Common.Security
         }
 
         public string GenerateToken(User customer)
+        {
+            var claims = new[] {
+                new Claim("Id", customer.Id.ToString()),
+                new Claim(ClaimTypes.Email, customer.Email),
+                new Claim(ClaimTypes.Role, customer.UserRole.ToString())
+            };
+
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecretKey"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+
+            var tokenDeskriptor = new JwtSecurityToken(_configuration["Issuer"], _configuration["Audience"], claims,
+                expires: DateTime.Now.AddMinutes(double.Parse(_configuration["Lifetime"])),
+                signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(tokenDeskriptor);
+        }
+
+        public string GenerateAdminToken(Admin customer)
         {
             var claims = new[] {
                 new Claim("Id", customer.Id.ToString()),

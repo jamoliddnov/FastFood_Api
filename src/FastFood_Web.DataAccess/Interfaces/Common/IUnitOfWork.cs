@@ -4,7 +4,7 @@ namespace FastFood_Web.DataAccess.Interfaces.Common
 {
     public interface IUnitOfWork
     {
-        public IAdminRepositorie AdminRepositories { get; }
+        public IAdminRepositorie Admins { get; }
         public IAllocationOperatorRepositore AllocationOperators { get; }
         public ICategoryFastFoodRepositorie CategoryFastFoods { get; }
         public ICustomerRepositorie Customers { get; }
