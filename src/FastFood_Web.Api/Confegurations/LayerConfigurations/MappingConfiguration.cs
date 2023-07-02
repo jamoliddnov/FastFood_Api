@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using FastFood_Web.Domain.Entities.Customers;
+using FastFood_Web.Domain.Entities.Empolyees;
 using FastFood_Web.Domain.Entities.Users;
 using FastFood_Web.Service.Dtos.AccountDto;
+using FastFood_Web.Service.Dtos.AdminDto;
 
 namespace FastFood_Web.Api.Confegurations.LayerConfigurations
 {
@@ -11,6 +13,7 @@ namespace FastFood_Web.Api.Confegurations.LayerConfigurations
         {
             CreateMap<AccountRegisterDto, Customer>();
             CreateMap<AccountRegisterDto, User>();
+            CreateMap<AdminRegisterDto, Admin>();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using FastFood_Web.Service.Dtos.AccountDto;
-using FastFood_Web.Service.Interfaces;
+using FastFood_Web.Service.Interfaces.Accounts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
