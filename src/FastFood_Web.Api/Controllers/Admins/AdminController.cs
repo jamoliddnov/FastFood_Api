@@ -23,7 +23,7 @@ namespace FastFood_Web.Api.Controllers.Admins
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(AdminLoginDto adminLogin)
-        { 
+        {
             return Ok(await _adminService.LoginAsync(adminLogin));
         }
     }

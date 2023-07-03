@@ -31,7 +31,7 @@ namespace FastFood_Web.Api.Controllers
         }
 
         [HttpPost("send-to-Email")]
-        public async Task<IActionResult> SendToEmail([FromForm] SendToEmailDto sendToEmail)
+        public async Task<IActionResult> SendToEmail([FromForm] SendCodeToEmailDto sendToEmail)
         {
             await _accountSevrice.SendCodeAsync(sendToEmail);
             return Ok();

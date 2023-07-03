@@ -15,8 +15,11 @@ namespace FastFood_Web.Api.Confegurations.LayerConfigurations
         public static void AddService(this IServiceCollection serviceDescriptors)
         {
             serviceDescriptors.AddHttpContextAccessor();
-            serviceDescriptors.AddScoped<IAdminService, AdminService>();
             serviceDescriptors.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            serviceDescriptors.AddScoped<IVerifyPhoneNumberService, VerifyPhoneNumberService>();
+            serviceDescriptors.AddScoped<IVerifyEmailService, VerifyEmailService>();
+            serviceDescriptors.AddScoped<IAdminService, AdminService>();
             serviceDescriptors.AddScoped<IAccountSevrice, AccountService>();
             serviceDescriptors.AddScoped<IEmailService, EmailService>();
             serviceDescriptors.AddScoped<IAuthManager, AuthManager>();

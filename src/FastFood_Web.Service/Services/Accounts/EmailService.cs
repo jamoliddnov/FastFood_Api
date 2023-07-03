@@ -1,11 +1,11 @@
-﻿using FastFood_Web.Service.Interfaces.Common;
+﻿using FastFood_Web.Service.Interfaces.Accounts;
 using FastFood_Web.Service.ViewModels.Helpers;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Text;
 
-namespace FastFood_Web.Service.Services.Common
+namespace FastFood_Web.Service.Services.Accounts
 {
     public class EmailService : IEmailService
     {
