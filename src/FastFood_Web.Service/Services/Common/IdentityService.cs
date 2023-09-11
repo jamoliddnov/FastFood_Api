@@ -1,5 +1,6 @@
 ﻿using FastFood_Web.Service.Interfaces.Common;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 #pragma warning disable
 
@@ -18,7 +19,7 @@ namespace FastFood_Web.Service.Services.Common
         {
             get
             {
-                var res = _accessor.HttpContext!.User.FindFirst(Id);
+                var res = _accessor.HttpContext!.User.FindFirst(ClaimTypes.NameIdentifier);
                 return res is not null ? res.Value : null;
             }
         }

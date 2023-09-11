@@ -1,9 +1,8 @@
 ﻿using FastFood_Web.Domain.Common;
-using FastFood_Web.Domain.Entities.Customers;
 using FastFood_Web.Domain.Entities.Empolyees;
 using FastFood_Web.Domain.Enums;
 
-namespace FastFood_Web.Domain.Entities.Orders
+namespace FastFood_Web.Domain.Entities
 {
     public class Order : Base
     {

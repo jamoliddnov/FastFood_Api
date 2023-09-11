@@ -1,7 +1,6 @@
 ﻿using FastFood_Web.Domain.Common;
-using FastFood_Web.Domain.Entities.Products;
 
-namespace FastFood_Web.Domain.Entities.Orders
+namespace FastFood_Web.Domain.Entities
 {
     public class OrderDetail : Base
     {

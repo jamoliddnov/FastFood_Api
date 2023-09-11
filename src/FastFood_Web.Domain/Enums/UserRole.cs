@@ -7,5 +7,6 @@
         ReceivingOperator = 2,
         Deliver = 3,
         Admin = 4,
+        SuperAdmin = 5,
     }
 }

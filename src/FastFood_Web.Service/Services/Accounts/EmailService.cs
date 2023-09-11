@@ -1,22 +1,28 @@
-﻿using FastFood_Web.Service.Interfaces.Accounts;
-using FastFood_Web.Service.ViewModels.Helpers;
+﻿using FastFood_Web.DataAccess.Interfaces.Common;
+using FastFood_Web.Service.Common.Exceptions;
+using FastFood_Web.Service.Common.Security;
+using FastFood_Web.Service.Dtos.AccountDto;
+using FastFood_Web.Service.Interfaces.Accounts;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Text;
+using System.Net;
 
 namespace FastFood_Web.Service.Services.Accounts
 {
     public class EmailService : IEmailService
     {
         private readonly IConfiguration _configuration;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public EmailService(IConfiguration configuration)
+        public EmailService(IConfiguration configuration, IUnitOfWork unitOfWork)
         {
             _configuration = configuration.GetSection("EmailSettings");
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> SendAsync(EmailMessage emailMessage)
+        public async Task<bool> SendAsync(EmailMessageDto emailMessage)
         {
             var mail = new MimeMessage();
             mail.From.Add(MailboxAddress.Parse(_configuration["Email"]));
@@ -30,6 +36,30 @@ namespace FastFood_Web.Service.Services.Accounts
             await smtp.SendAsync(mail);
             await smtp.DisconnectAsync(true);
             return true;
+        }
+
+        public async Task<bool> VerifyPasswordAsync(ResetPasswordDto emailVerifyDto)
+        {
+            var admin = await _unitOfWork.Admins.FirstOrDefaultAsync(x => x.Email == emailVerifyDto.Email);
+
+            if (admin is null)
+            {
+                throw new StatusCodeException(HttpStatusCode.NotFound, "user not found!");
+            }
+
+            var adminPassword = PassowrdHasher.Hash(emailVerifyDto.Password);
+            admin.PasswordHash = adminPassword.PasswordHash;
+            admin.Salt = adminPassword.Salt;
+
+            _unitOfWork.Admins.Update(admin, admin.Id);
+            var result = await _unitOfWork.SaveChangeAsync();
+            return result > 0;
+
+        }
+
+        public Task<object?> VerifyPasswordAsync(EmailVerifyDto emailVerifyDto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

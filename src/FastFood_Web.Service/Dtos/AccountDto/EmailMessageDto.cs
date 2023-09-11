@@ -5,10 +5,10 @@ namespace FastFood_Web.Service.Dtos.AccountDto
     public class EmailMessageDto
     {
         [Required]
-        public string To { get; set; } = string.Empty;
+        public string To { get; set; } = String.Empty;
         [Required]
-        public int Body { get; set; }
+        public string Body { get; set; } = String.Empty;
         [Required]
-        public string Subject { get; set; } = string.Empty;
+        public string Subject { get; set; } = String.Empty;
     }
 }

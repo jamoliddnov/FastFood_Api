@@ -9,6 +9,6 @@ namespace FastFood_Web.Domain.Entities.Empolyees
         public string Email { get; set; } = String.Empty;
         public string PasswordHash { get; set; } = String.Empty;
         public string Salt { get; set; } = String.Empty;
-        public UserRole UserRole { get; set; } = UserRole.Admin;
+        public UserRole UserRole { get; set; }
     }
 }

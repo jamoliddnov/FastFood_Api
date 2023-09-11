@@ -1,4 +1,4 @@
-﻿using FastFood_Web.Domain.Entities.Users;
+﻿using FastFood_Web.Domain.Entities;
 using FastFood_Web.Service.Common.Attributes;
 using System.ComponentModel.DataAnnotations;
 

@@ -1,5 +1,5 @@
-﻿using FastFood_Web.Domain.Entities.Empolyees;
-using FastFood_Web.Domain.Entities.Users;
+﻿using FastFood_Web.Domain.Entities;
+using FastFood_Web.Domain.Entities.Empolyees;
 
 namespace FastFood_Web.Service.Interfaces.Common
 {

@@ -1,7 +1,7 @@
 ﻿using FastFood_Web.Domain.Common;
 using FastFood_Web.Domain.Enums;
 
-namespace FastFood_Web.Domain.Entities.Users
+namespace FastFood_Web.Domain.Entities
 {
     public class User : Base
     {

@@ -1,6 +1,6 @@
 ﻿using FastFood_Web.Domain.Common;
 
-namespace FastFood_Web.Domain.Entities.Products
+namespace FastFood_Web.Domain.Entities
 {
     public class CategoryFastFood : Base
     {

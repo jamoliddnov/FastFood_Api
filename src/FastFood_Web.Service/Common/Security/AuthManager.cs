@@ -1,5 +1,5 @@
-﻿using FastFood_Web.Domain.Entities.Empolyees;
-using FastFood_Web.Domain.Entities.Users;
+﻿using FastFood_Web.Domain.Entities;
+using FastFood_Web.Domain.Entities.Empolyees;
 using FastFood_Web.Service.Interfaces.Common;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -40,7 +40,7 @@ namespace FastFood_Web.Service.Common.Security
             var claims = new[] {
                 new Claim("Id", customer.Id.ToString()),
                 new Claim(ClaimTypes.Email, customer.Email),
-                new Claim(ClaimTypes.Role, customer.UserRole.ToString())
+
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecretKey"]));

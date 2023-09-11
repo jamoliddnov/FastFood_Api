@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FastFood_Web.Service.Dtos.AccountDto
 {
-    internal class VerifyPhoneNumberDto
+    public class VerifyPhoneNumberDto
     {
         [Required, PhoneNumber]
         public string PhoneNumber { get; set; } = string.Empty;
