@@ -19,6 +19,12 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
 	  <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.31.0" />
 	  <PackageReference Include="MimeKit" Version="4.1.0" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	  <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Folder Include="ViewModels\Helpers\" />
 	</ItemGroup>
 </Project>

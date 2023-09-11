@@ -1,9 +1,5 @@
-﻿using FastFood_Web.Domain.Entities.Customers;
-using FastFood_Web.Domain.Entities.Districts;
+﻿using FastFood_Web.Domain.Entities;
 using FastFood_Web.Domain.Entities.Empolyees;
-using FastFood_Web.Domain.Entities.Orders;
-using FastFood_Web.Domain.Entities.Products;
-using FastFood_Web.Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace FastFood_Web.DataAccess.DbContexts

@@ -18,8 +18,6 @@ builder.Services.AddMemoryCache();
 builder.ConfigureAuth();
 builder.Services.ConfigureSwaggerAuthorize();
 
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,17 +27,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 if (app.Services.GetService<IHttpContextAccessor>() != null)
 {
     HttpContextHelper.Accessor = app.Services.GetRequiredService<IHttpContextAccessor>();
 }
-else
-{
-
-}
 
 app.UseMiddleware<TokenRedirectMiddleware>();
-
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

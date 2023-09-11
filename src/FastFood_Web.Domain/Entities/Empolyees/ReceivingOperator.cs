@@ -1,5 +1,4 @@
 ﻿using FastFood_Web.Domain.Common;
-using FastFood_Web.Domain.Entities.Districts;
 
 namespace FastFood_Web.Domain.Entities.Empolyees
 {

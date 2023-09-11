@@ -1,5 +1,4 @@
 ﻿using FastFood_Web.Domain.Common;
-using FastFood_Web.Domain.Entities.Users;
 
 namespace FastFood_Web.Domain.Entities.Empolyees
 {
