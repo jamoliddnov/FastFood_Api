@@ -4,31 +4,29 @@ using FastFood_Web.Service.Common.Attributes;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace FastFood_Web.Service.Dtos
+
+namespace FastFood_Web.Service.Dto.ProductDto
 {
-    public class ProductDto
+    public class UpdateProductDto
     {
-        [Required]
         public string CategoryId { get; set; } = string.Empty;
-        [Required, MaxLength(30)]
-        public string Name { get; set; } = String.Empty;
-        [Required, MaxFileSize(2), AllowedFiles(new string[] { ".jpg", ".png", ".jpeg", ".svg", ".webp", })]
+        [MaxLength(30)]
+        public string Name { get; set; } = string.Empty;
+        [MaxFileSize(2), AllowedFiles(new string[] { ".jpg", ".png", ".jpeg", ".svg", ".web", })]
         public IFormFile? Image { get; set; }
-        [Required]
+
         public float Price { get; set; }
-        [Required]
         public FastFoodVolume FastFoodVolume { get; set; }
 
-        public static implicit operator Product(ProductDto productDto)
+        public static implicit operator Product(UpdateProductDto productDto)
         {
             return new Product
             {
                 CategoryId = productDto.CategoryId,
                 Name = productDto.Name,
                 Price = productDto.Price,
-                //          FastFoodVolume = productDto.FastFoodVolume,
+                FastFoodVolume = productDto.FastFoodVolume,
             };
         }
-
     }
 }
