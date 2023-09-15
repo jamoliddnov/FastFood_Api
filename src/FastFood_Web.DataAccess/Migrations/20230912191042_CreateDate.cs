@@ -16,7 +16,8 @@ namespace FastFood_Web.DataAccess.Migrations
                     FullName = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
-                    Salt = table.Column<string>(type: "text", nullable: false)
+                    Salt = table.Column<string>(type: "text", nullable: false),
+                    UserRole = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -24,15 +25,15 @@ namespace FastFood_Web.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoryFastFoods",
+                name: "Categorys",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    CategoryName = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryFastFoods", x => x.Id);
+                    table.PrimaryKey("PK_Categorys", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -66,7 +67,7 @@ namespace FastFood_Web.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TypeFastFoods",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
@@ -74,15 +75,15 @@ namespace FastFood_Web.DataAccess.Migrations
                     ImagePath = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
                     FastFoodVolume = table.Column<int>(type: "integer", nullable: false),
-                    CategoryFastFoodId = table.Column<string>(type: "text", nullable: false)
+                    CategoryId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TypeFastFoods", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TypeFastFoods_CategoryFastFoods_CategoryFastFoodId",
-                        column: x => x.CategoryFastFoodId,
-                        principalTable: "CategoryFastFoods",
+                        name: "FK_Products_Categorys_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categorys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -253,9 +254,9 @@ namespace FastFood_Web.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_TypeFastFoods_TypeFastFoodId",
+                        name: "FK_OrderDetails_Products_TypeFastFoodId",
                         column: x => x.TypeFastFoodId,
-                        principalTable: "TypeFastFoods",
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -311,14 +312,14 @@ namespace FastFood_Web.DataAccess.Migrations
                 column: "ReceivingOperatorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ReceivingOperators_DistrictFilialId",
                 table: "ReceivingOperators",
                 column: "DistrictFilialId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TypeFastFoods_CategoryFastFoodId",
-                table: "TypeFastFoods",
-                column: "CategoryFastFoodId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -336,7 +337,7 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "TypeFastFoods");
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Customers");
@@ -348,7 +349,7 @@ namespace FastFood_Web.DataAccess.Migrations
                 name: "ReceivingOperators");
 
             migrationBuilder.DropTable(
-                name: "CategoryFastFoods");
+                name: "Categorys");
 
             migrationBuilder.DropTable(
                 name: "Users");

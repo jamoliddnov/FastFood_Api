@@ -3,7 +3,7 @@ using FastFood_Web.Domain.Entities;
 
 namespace FastFood_Web.DataAccess.Interfaces
 {
-    public interface ITypeFastFoodRepositorie : IGenericRepositorie<TypeFastFood>
+    public interface ICategoryRepositorie : IGenericRepositorie<Category>
     {
     }
 }

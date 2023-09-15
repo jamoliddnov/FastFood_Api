@@ -12,7 +12,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
         public IAdminRepositorie Admins { get; }
         public IAllocationOperatorRepositore AllocationOperators { get; }
 
-        public ICategoryFastFoodRepositorie CategoryFastFoods { get; }
+        public ICategoryRepositorie Categorys { get; }
 
         public ICustomerRepositorie Customers { get; }
 
@@ -27,7 +27,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
 
         public IRecevingOperatorRepositorie RecevingOperators { get; }
 
-        public ITypeFastFoodRepositorie TypeFastFoods { get; }
+        public IProductRepositorie Products { get; }
 
         public IUserRepositorie Users { get; }
 
@@ -36,7 +36,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
             _appDbContext = appDbContext;
             Admins = new AdminRepositorie(appDbContext);
             AllocationOperators = new AllocationOperatorRepositorie(appDbContext);
-            CategoryFastFoods = new CategoryFastFoodRepositorie(appDbContext);
+            Categorys = new CategoryRepositorie(appDbContext);
             Customers = new CustomerRepositorie(appDbContext);
             Delivers = new DeliverRepositorie(appDbContext);
             Districts = new DistrictRepositorie(appDbContext);
@@ -44,7 +44,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
             Orders = new OrderRepositorie(appDbContext);
             OrderDetails = new OrderDetailRepositorie(appDbContext);
             RecevingOperators = new RecevingOperatorRepositorie(appDbContext);
-            TypeFastFoods = new TypeFastFoodRepositorie(appDbContext);
+            Products = new ProductRepositorie(appDbContext);
             Users = new UserRepositorie(appDbContext);
         }
 

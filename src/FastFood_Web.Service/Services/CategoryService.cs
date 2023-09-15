@@ -4,6 +4,8 @@ using FastFood_Web.Service.Interfaces;
 using FastFood_Web.Service.Interfaces.Common;
 using FastFood_Web.Service.Services.Common.Utils;
 
+
+
 namespace FastFood_Web.Service.Services
 {
     public class CategoryService : ICategoryService
@@ -16,16 +18,16 @@ namespace FastFood_Web.Service.Services
         {
             _unitOfWork = unitOfWork;
             _authManager = authManager;
-            _paginatonService = paginatonService;   
+            _paginatonService = paginatonService;
         }
 
-        public async Task<bool> CreateAsync(CategoryFastFood categoryFastFood)
+        public async Task<bool> CreateAsync(Category categoryFastFood)
         {
             try
             {
                 var category = categoryFastFood;
 
-                _unitOfWork.CategoryFastFoods.Add(category);
+                _unitOfWork.Categorys.Add(category);
 
                 var result = await _unitOfWork.SaveChangeAsync();
 
@@ -41,7 +43,7 @@ namespace FastFood_Web.Service.Services
         {
             try
             {
-                _unitOfWork.CategoryFastFoods.Delete(id);
+                _unitOfWork.Categorys.Delete(id);
 
                 var result = await _unitOfWork.SaveChangeAsync();
 
@@ -53,11 +55,11 @@ namespace FastFood_Web.Service.Services
             }
         }
 
-        public async Task<IEnumerable<CategoryFastFood>> GetAllAsync(PagenationParams @params)
+        public async Task<IEnumerable<Category>> GetAllAsync(PagenationParams @params)
         {
             try
             {
-                var query = _unitOfWork.CategoryFastFoods.GetAll();
+                var query = _unitOfWork.Categorys.GetAll();
 
                 return await _paginatonService.ToPageAsync(query, @params.PageNumber, @params.PageSize);
             }
@@ -67,13 +69,27 @@ namespace FastFood_Web.Service.Services
             }
         }
 
-        public async Task<bool> UpdateAsync(string id, CategoryFastFood categoryFastFood)
+        public async Task<Category> GetByIdAsync(string id)
+        {
+            try
+            {
+                var category = await _unitOfWork.Categorys.FindByIdAsync(id);
+
+                return category;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(string id, Category categoryFastFood)
         {
             try
             {
                 var category = categoryFastFood;
 
-                _unitOfWork.CategoryFastFoods.Update(category, id);
+                _unitOfWork.Categorys.Update(category, id);
 
                 var result = await _unitOfWork.SaveChangeAsync();
 

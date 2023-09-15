@@ -3,12 +3,6 @@ using FastFood_Web.Service.Services.Common.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace FastFood_Web.Service.Services.Common
 {
@@ -27,11 +21,11 @@ namespace FastFood_Web.Service.Services.Common
             {
                 int totalItems = await items.CountAsync();
                 PagenationMetaData pagenationMetaData = new PagenationMetaData()
-                { 
+                {
                     CurrentPage = pageNumber,
                     PageSize = pageSize,
                     TotalItems = totalItems,
-                    TotalPages = (int)Math.Ceiling((double)totalItems / (double) pageSize),
+                    TotalPages = (int)Math.Ceiling((double)totalItems / (double)pageSize),
                     HasPrevious = pageNumber > 0
                 };
                 pagenationMetaData.HasNext = pagenationMetaData.CurrentPage < pagenationMetaData.TotalPages;

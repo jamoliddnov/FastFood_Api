@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FastFood_Web.Service.Services.Common.Utils
+﻿namespace FastFood_Web.Service.Services.Common.Utils
 {
     public class PagenationParams
     {

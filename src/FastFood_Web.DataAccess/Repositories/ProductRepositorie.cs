@@ -5,9 +5,9 @@ using FastFood_Web.Domain.Entities;
 
 namespace FastFood_Web.DataAccess.Repositories
 {
-    public class TypeFastFoodRepositorie : GenericRepositorie<TypeFastFood>, ITypeFastFoodRepositorie
+    public class ProductRepositorie : GenericRepositorie<Product>, IProductRepositorie
     {
-        public TypeFastFoodRepositorie(AppDbContext dbContext) : base(dbContext)
+        public ProductRepositorie(AppDbContext dbContext) : base(dbContext)
         {
         }
     }

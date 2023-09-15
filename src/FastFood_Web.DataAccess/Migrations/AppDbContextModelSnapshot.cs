@@ -22,18 +22,18 @@ namespace FastFood_Web.DataAccess.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.CategoryFastFood", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Category", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<string>("CategoryName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoryFastFoods");
+                    b.ToTable("Categorys");
                 });
 
             modelBuilder.Entity("FastFood_Web.Domain.Entities.Customer", b =>
@@ -280,12 +280,12 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.ToTable("OrderDetails");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.TypeFastFood", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Product", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<string>("CategoryFastFoodId")
+                    b.Property<string>("CategoryId")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -305,9 +305,9 @@ namespace FastFood_Web.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryFastFoodId");
+                    b.HasIndex("CategoryId");
 
-                    b.ToTable("TypeFastFoods");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("FastFood_Web.Domain.Entities.User", b =>
@@ -444,7 +444,7 @@ namespace FastFood_Web.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FastFood_Web.Domain.Entities.TypeFastFood", "TypeFastFood")
+                    b.HasOne("FastFood_Web.Domain.Entities.Product", "TypeFastFood")
                         .WithMany()
                         .HasForeignKey("TypeFastFoodId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -455,15 +455,15 @@ namespace FastFood_Web.DataAccess.Migrations
                     b.Navigation("TypeFastFood");
                 });
 
-            modelBuilder.Entity("FastFood_Web.Domain.Entities.TypeFastFood", b =>
+            modelBuilder.Entity("FastFood_Web.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("FastFood_Web.Domain.Entities.CategoryFastFood", "CategoryFastFood")
+                    b.HasOne("FastFood_Web.Domain.Entities.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryFastFoodId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CategoryFastFood");
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

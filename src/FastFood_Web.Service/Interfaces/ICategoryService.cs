@@ -5,13 +5,10 @@ namespace FastFood_Web.Service.Interfaces
 {
     public interface ICategoryService
     {
-        public Task<bool> CreateAsync(CategoryFastFood categoryFastFood);
-        public Task<bool> UpdateAsync(string id, CategoryFastFood categoryFastFood);
+        public Task<bool> CreateAsync(Category categoryFastFood);
+        public Task<bool> UpdateAsync(string id, Category categoryFastFood);
         public Task<bool> DeleteAsync(string id);
-        public Task<IEnumerable<CategoryFastFood>> GetAllAsync(PagenationParams @params);   
-
-       // public Task<CategoryFastFood> GetByIdAsync(string id);
-       
-   
+        public Task<IEnumerable<Category>> GetAllAsync(PagenationParams @params);
+        public Task<Category> GetByIdAsync(string id);
     }
 }

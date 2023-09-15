@@ -8,11 +8,11 @@ namespace FastFood_Web.Service.Dtos
         [Required, MaxLength(30)]
         public string Name { get; set; } = String.Empty;
 
-        public static implicit operator CategoryFastFood(CategoryDto categoryDto)
+        public static implicit operator Category(CategoryDto categoryDto)
         {
-            return new CategoryFastFood
+            return new Category
             {
-                CategoryName = categoryDto.Name,
+                Name = categoryDto.Name,
             };
         }
     }
