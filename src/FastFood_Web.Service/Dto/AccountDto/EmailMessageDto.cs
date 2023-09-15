@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FastFood_Web.Service.Dtos.AccountDto
+namespace FastFood_Web.Service.Dto.AccountDto
 {
     public class EmailMessageDto
     {

@@ -1,6 +1,6 @@
 ﻿using FastFood_Web.DataAccess.Interfaces.Common;
 using FastFood_Web.Service.Common.Exceptions;
-using FastFood_Web.Service.Dtos.AccountDto;
+using FastFood_Web.Service.Dto.AccountDto;
 using FastFood_Web.Service.Interfaces.Accounts;
 using Microsoft.Extensions.Caching.Memory;
 using System.Net;

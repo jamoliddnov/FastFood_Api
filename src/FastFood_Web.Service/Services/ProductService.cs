@@ -17,7 +17,6 @@ namespace FastFood_Web.Service.Services
         private readonly IFileService _fileService;
         private readonly IPaginatonService _paginatonService;
 
-
         public ProductService(IUnitOfWork unitOfWork, IFileService fileService, IPaginatonService paginatonService)
         {
             _unitOfWork = unitOfWork;
@@ -128,44 +127,58 @@ namespace FastFood_Web.Service.Services
 
                 if (resultProduct is not null)
                 {
-                    var result = _unitOfWork.Entry(resultProduct);
-                    if (result.State == EntityState.Detached)
+                    _unitOfWork.Entry(resultProduct).State = EntityState.Detached;
+
+                    Product product = new Product(); 
+                        
+                    product.Id = id;
+                    if (productDto.Name is null)
                     {
-                        var product = (Product)productDto;
-
-                        product.Id = id;
-                        if (product.Name is null)
-                        {
-                            product.Name = resultProduct.Name;
-                        }
-                        if (product.Price == null)
-                        {
-                            product.Price = resultProduct.Price;
-                        }
-                        if (product.CategoryId is null)
-                        {
-                            product.CategoryId = resultProduct.CategoryId;
-                        }
-                        if (product.FastFoodVolume == null)
-                        {
-                            product.FastFoodVolume = resultProduct.FastFoodVolume;
-                        }
-                        if (product.ImagePath == null)
-                        {
-                            product.ImagePath = resultProduct.ImagePath;
-                        }
-                        else
-                        {
-                            product.ImagePath = await _fileService.SaveImageAsync(productDto.Image);
-
-                        }
-
-                        _unitOfWork.Products.Update(product, id);
-
-                        var results = await _unitOfWork.SaveChangeAsync();
-
-                        return results > 0;
+                        product.Name = resultProduct.Name;
                     }
+                    else
+                    {
+                        product.Name = productDto.Name;
+                    }
+                    if (productDto.Price == null)
+                    {
+                        product.Price = resultProduct.Price;
+                    }
+                    else
+                    {
+                        product.Price = resultProduct.Price;
+                    }
+                    if (productDto.CategoryId is null)
+                    {
+                        product.CategoryId = resultProduct.CategoryId;
+                    }
+                    else
+                    { 
+                        product.CategoryId = resultProduct.CategoryId;
+                    }
+                    if (productDto.FastFoodVolume == null)
+                    {
+                        product.FastFoodVolume = resultProduct.FastFoodVolume;
+                    }
+                    else
+                    { 
+                        product.FastFoodVolume = productDto.FastFoodVolume.Value;
+                    }
+                    if (productDto.Image == null)
+                    {
+                        product.ImagePath = resultProduct.ImagePath;
+                    }
+                    else
+                    {
+                        product.ImagePath = await _fileService.SaveImageAsync(productDto.Image);
+                    }
+
+                    _unitOfWork.Products.Update(product, id);
+
+                    var results = await _unitOfWork.SaveChangeAsync();
+
+                    return results > 0;
+                    
                 }
                 throw new StatusCodeException(HttpStatusCode.NotFound, "Product not found!");
             }

@@ -2,7 +2,7 @@
 using FastFood_Web.Domain.Entities;
 using FastFood_Web.Service.Common.Exceptions;
 using FastFood_Web.Service.Common.Security;
-using FastFood_Web.Service.Dtos.AccountDto;
+using FastFood_Web.Service.Dto.AccountDto;
 using FastFood_Web.Service.Helpers;
 using FastFood_Web.Service.Interfaces.Accounts;
 using FastFood_Web.Service.Interfaces.Common;
