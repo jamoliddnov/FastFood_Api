@@ -2,7 +2,7 @@
 using FastFood_Web.Domain.Entities.Empolyees;
 using FastFood_Web.Service.Common.Exceptions;
 using FastFood_Web.Service.Common.Security;
-using FastFood_Web.Service.Dtos.AdminDto;
+using FastFood_Web.Service.Dto.AdminDto;
 using FastFood_Web.Service.Interfaces;
 using FastFood_Web.Service.Interfaces.Common;
 using System.Net;

@@ -1,4 +1,4 @@
-﻿using FastFood_Web.Service.Dtos.AccountDto;
+﻿using FastFood_Web.Service.Dto.AccountDto;
 
 namespace FastFood_Web.Service.Interfaces.Accounts
 {

@@ -9,24 +9,14 @@ namespace FastFood_Web.Service.Dto.ProductDto
 {
     public class UpdateProductDto
     {
-        public string CategoryId { get; set; } = string.Empty;
+        public string? CategoryId { get; set; } = string.Empty;
         [MaxLength(30)]
-        public string Name { get; set; } = string.Empty;
+        public string? Name { get; set; } = string.Empty;
         [MaxFileSize(2), AllowedFiles(new string[] { ".jpg", ".png", ".jpeg", ".svg", ".web", })]
         public IFormFile? Image { get; set; }
 
-        public float Price { get; set; }
-        public FastFoodVolume FastFoodVolume { get; set; }
+        public float? Price { get; set; }
+        public FastFoodVolume? FastFoodVolume { get; set; }
 
-        public static implicit operator Product(UpdateProductDto productDto)
-        {
-            return new Product
-            {
-                CategoryId = productDto.CategoryId,
-                Name = productDto.Name,
-                Price = productDto.Price,
-                FastFoodVolume = productDto.FastFoodVolume,
-            };
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using FastFood_Web.Service.Dtos.AdminDto;
+﻿using FastFood_Web.Service.Dto.AdminDto;
 
 namespace FastFood_Web.Service.Interfaces
 {
