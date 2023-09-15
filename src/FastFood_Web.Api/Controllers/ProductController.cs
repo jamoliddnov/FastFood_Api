@@ -1,4 +1,4 @@
-﻿using FastFood_Web.Service.Dtos;
+﻿using FastFood_Web.Service.Dto.ProductDto;
 using FastFood_Web.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +15,7 @@ namespace FastFood_Web.Api.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateAsync([FromForm] ProductDto productDto)
+        public async Task<IActionResult> CreateAsync([FromForm] CreateProductDto productDto)
         {
             return Ok(await _productService.CreateAsync(productDto));
         }
