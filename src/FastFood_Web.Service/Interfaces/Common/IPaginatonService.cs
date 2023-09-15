@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FastFood_Web.Service.Interfaces.Common
+﻿namespace FastFood_Web.Service.Interfaces.Common
 {
     public interface IPaginatonService
     {

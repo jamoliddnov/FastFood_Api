@@ -37,7 +37,13 @@ namespace FastFood_Web.Api.Controllers
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllAsync([FromQuery] int page = 1)
         {
-            return Ok(await _categoryService.GetAllAsync(new PagenationParams (page)));
+            return Ok(await _categoryService.GetAllAsync(new PagenationParams(page)));
+        }
+
+        [HttpGet("getById")]
+        public async Task<IActionResult> GetByIdAsync(string id)
+        {
+            return Ok(await _categoryService.GetByIdAsync(id));
         }
     }
 }
