@@ -46,7 +46,7 @@ namespace FastFood_Web.Service.Services
             var adminResult = await _unitOfWork.Admins.FirstOrDefaultAsync(x => x.Email == adminRegister.Email);
             if (adminResult is not null)
             {
-                throw new StatusCodeException(System.Net.HttpStatusCode.Conflict, "Email alredy exist");
+                throw new StatusCodeException(System.Net.HttpStatusCode.Conflict, "Email already exist");
             }
 
             var password = PassowrdHasher.Hash(adminRegister.Password);

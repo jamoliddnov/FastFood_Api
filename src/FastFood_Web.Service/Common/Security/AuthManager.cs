@@ -21,7 +21,6 @@ namespace FastFood_Web.Service.Common.Security
         {
             var claims = new[] {
                 new Claim("Id", customer.Id.ToString()),
-                new Claim(ClaimTypes.Email, customer.Email),
                 new Claim(ClaimTypes.Role, customer.UserRole.ToString())
             };
 

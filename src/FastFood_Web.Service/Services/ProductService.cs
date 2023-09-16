@@ -129,8 +129,8 @@ namespace FastFood_Web.Service.Services
                 {
                     _unitOfWork.Entry(resultProduct).State = EntityState.Detached;
 
-                    Product product = new Product(); 
-                        
+                    Product product = new Product();
+
                     product.Id = id;
                     if (productDto.Name is null)
                     {
@@ -153,7 +153,7 @@ namespace FastFood_Web.Service.Services
                         product.CategoryId = resultProduct.CategoryId;
                     }
                     else
-                    { 
+                    {
                         product.CategoryId = resultProduct.CategoryId;
                     }
                     if (productDto.FastFoodVolume == null)
@@ -161,7 +161,7 @@ namespace FastFood_Web.Service.Services
                         product.FastFoodVolume = resultProduct.FastFoodVolume;
                     }
                     else
-                    { 
+                    {
                         product.FastFoodVolume = productDto.FastFoodVolume.Value;
                     }
                     if (productDto.Image == null)
@@ -178,7 +178,7 @@ namespace FastFood_Web.Service.Services
                     var results = await _unitOfWork.SaveChangeAsync();
 
                     return results > 0;
-                    
+
                 }
                 throw new StatusCodeException(HttpStatusCode.NotFound, "Product not found!");
             }

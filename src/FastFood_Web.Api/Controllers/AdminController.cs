@@ -5,7 +5,7 @@ using FastFood_Web.Service.Interfaces.Accounts;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace FastFood_Web.Api.Controllers.Admins
+namespace FastFood_Web.Api.Controllers
 {
     [Route("api/admins")]
     [ApiController]
@@ -35,15 +35,15 @@ namespace FastFood_Web.Api.Controllers.Admins
         }
 
         [HttpPost("send-to-email")]
-        public async Task<IActionResult> SendtoEmail([FromForm] SendCodeToEmailDto codeToEmailDto)
+        public async Task<IActionResult> SendToEmailAsync([FromForm] SendCodeToEmailDto codeToEmailDto)
         {
             return Ok(await _verifyEmailService.SendCodeAsync(codeToEmailDto));
         }
 
-        [HttpPost("verify-email")]
-        public async Task<IActionResult> VerifyEmail([FromForm] EmailVerifyDto emailVerifyDto)
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPasswordAsync([FromForm] ResetPasswordDto resetPasswordDto)
         {
-            return Ok(await _emailService.VerifyPasswordAsync(emailVerifyDto));
+            return Ok(await _emailService.VerifyPasswordAsync(resetPasswordDto));
         }
     }
 }

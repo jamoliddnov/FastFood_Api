@@ -16,26 +16,36 @@ namespace FastFood_Web.Service.Services.Accounts
         private readonly IConfiguration _configuration;
         private readonly IUnitOfWork _unitOfWork;
 
+
         public EmailService(IConfiguration configuration, IUnitOfWork unitOfWork)
         {
             _configuration = configuration.GetSection("EmailSettings");
             _unitOfWork = unitOfWork;
+
         }
 
         public async Task<bool> SendAsync(EmailMessageDto emailMessage)
         {
-            var mail = new MimeMessage();
-            mail.From.Add(MailboxAddress.Parse(_configuration["Email"]));
-            mail.To.Add(MailboxAddress.Parse(emailMessage.To));
-            mail.Subject = emailMessage.Subject;
-            mail.Body = new TextPart(TextFormat.Html) { Text = emailMessage.Body };
+            try
+            {
+                var mail = new MimeMessage();
+                mail.From.Add(MailboxAddress.Parse(_configuration["Email"]));
+                mail.To.Add(MailboxAddress.Parse(emailMessage.To));
+                mail.Subject = emailMessage.Subject;
+                mail.Body = new TextPart(TextFormat.Html) { Text = emailMessage.Body };
 
-            var smtp = new SmtpClient();
-            await smtp.ConnectAsync(_configuration["Host"], int.Parse(_configuration["Port"]), MailKit.Security.SecureSocketOptions.StartTls);
-            await smtp.AuthenticateAsync(_configuration["Email"], _configuration["Password"]);
-            await smtp.SendAsync(mail);
-            await smtp.DisconnectAsync(true);
-            return true;
+                var smtp = new SmtpClient();
+                await smtp.ConnectAsync(_configuration["Host"], int.Parse(_configuration["Port"]), MailKit.Security.SecureSocketOptions.StartTls);
+                await smtp.AuthenticateAsync(_configuration["Email"], _configuration["Password"]);
+                await smtp.SendAsync(mail);
+                await smtp.DisconnectAsync(true);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async Task<bool> VerifyPasswordAsync(ResetPasswordDto emailVerifyDto)
@@ -55,11 +65,6 @@ namespace FastFood_Web.Service.Services.Accounts
             var result = await _unitOfWork.SaveChangeAsync();
             return result > 0;
 
-        }
-
-        public Task<object?> VerifyPasswordAsync(EmailVerifyDto emailVerifyDto)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -4,7 +4,7 @@
 
 namespace FastFood_Web.DataAccess.Migrations
 {
-    public partial class CreateDate : Migration
+    public partial class CreateDateBase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,13 +53,11 @@ namespace FastFood_Web.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
                     FullName = table.Column<string>(type: "text", nullable: false),
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
                     Salt = table.Column<string>(type: "text", nullable: false),
-                    UserRole = table.Column<int>(type: "integer", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    UserRole = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
