@@ -1,7 +1,6 @@
 ﻿using FastFood_Web.DataAccess.Interfaces.Common;
 using FastFood_Web.Domain.Entities;
 using FastFood_Web.Service.Common.Exceptions;
-using FastFood_Web.Service.Common.Security;
 using FastFood_Web.Service.Dto.AccountDto;
 using FastFood_Web.Service.Interfaces.Accounts;
 using FastFood_Web.Service.Interfaces.Common;
@@ -39,13 +38,10 @@ namespace FastFood_Web.Service.Services.Accounts
                 throw new StatusCodeException(HttpStatusCode.Conflict, "Phone number already exist");
             }
 
-            var passwordResult = PassowrdHasher.Hash(accountCreate.Password);
-
             var user = (User)accountCreate;
 
-            user.Salt = passwordResult.Salt;
-            user.PasswordHash = passwordResult.PasswordHash;
-
+            user.Salt = "";
+            user.PasswordHash = "";
 
             _unitOfWork.Users.Add(user);
 

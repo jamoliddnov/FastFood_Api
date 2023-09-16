@@ -1,4 +1,4 @@
-﻿using FastFood_Web.Service.Dtos;
+﻿using FastFood_Web.Service.Dto;
 using FastFood_Web.Service.Interfaces;
 using FastFood_Web.Service.Services.Common.Utils;
 using Microsoft.AspNetCore.Mvc;

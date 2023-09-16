@@ -1,7 +1,7 @@
 ﻿using FastFood_Web.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace FastFood_Web.Service.Dtos
+namespace FastFood_Web.Service.Dto
 {
     public class CategoryDto
     {
