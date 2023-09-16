@@ -10,10 +10,6 @@ namespace FastFood_Web.Service.Dto.AccountDto
         public string FullName { get; set; } = String.Empty;
         [Required, PhoneNumberAttribute]
         public string PhoneNumber { get; set; } = String.Empty;
-        [Required, Email]
-        public string Email { get; set; } = String.Empty;
-        [Required, PasswordAttribute]
-        public string Password { get; set; } = String.Empty;
 
         public static implicit operator User(AccountRegisterDto accountRegister)
         {
@@ -21,7 +17,6 @@ namespace FastFood_Web.Service.Dto.AccountDto
             {
                 FullName = accountRegister.FullName,
                 PhoneNumber = accountRegister.PhoneNumber,
-                PasswordHash = accountRegister.Password
             };
         }
     }

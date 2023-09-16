@@ -11,13 +11,11 @@ namespace FastFood_Web.Service.Services
     public class CategoryService : ICategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAuthManager _authManager;
         private readonly IPaginatonService _paginatonService;
 
-        public CategoryService(IUnitOfWork unitOfWork, IAuthManager authManager, IPaginatonService paginatonService)
+        public CategoryService(IUnitOfWork unitOfWork, IPaginatonService paginatonService)
         {
             _unitOfWork = unitOfWork;
-            _authManager = authManager;
             _paginatonService = paginatonService;
         }
 
