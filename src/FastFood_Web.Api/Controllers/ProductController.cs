@@ -21,7 +21,7 @@ namespace FastFood_Web.Api.Controllers
             return Ok(await _productService.CreateAsync(productDto));
         }
 
-        [HttpPost("update")]
+        [HttpPut("update")]
         public async Task<IActionResult> UpdateAsync(string id, [FromForm] UpdateProductDto productDto)
         {
             return Ok(await _productService.UpdateAsync(id, productDto));

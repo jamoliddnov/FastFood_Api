@@ -2,7 +2,6 @@
 using FastFood_Web.DataAccess.Interfaces;
 using FastFood_Web.DataAccess.Repositories.Common;
 using FastFood_Web.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace FastFood_Web.DataAccess.Repositories
 {
@@ -12,9 +11,5 @@ namespace FastFood_Web.DataAccess.Repositories
         {
         }
 
-        public async Task<User?> GetByEmailAsync(string email)
-        {
-            return await context.Users.FirstOrDefaultAsync(x => x.Email == email);
-        }
     }
 }

@@ -37,35 +37,6 @@ namespace FastFood_Web.Service.Services.Accounts
             return res;
         }
 
-        public async Task<bool> VerifyEmail(EmailVerifyDto emailVerifyDto)
-        {
-            var adminResult = await _unitOfWork.Admins.FirstOrDefaultAsync(admin => admin.Email == emailVerifyDto.Email);
-
-            if (adminResult == null)
-            {
-                throw new StatusCodeException(HttpStatusCode.NotFound, "User not found!");
-            }
-
-            if (_memoryCache.TryGetValue(emailVerifyDto.Email, out int exceptedCode))
-            {
-                if (exceptedCode != emailVerifyDto.Code)
-                {
-                    throw new StatusCodeException(HttpStatusCode.BadRequest, "Code is wrong!");
-                }
-                else
-                {
-                    _unitOfWork.Admins.Update(adminResult, adminResult.Id);
-
-                    var result = await _unitOfWork.SaveChangeAsync();
-                }
-            }
-            else
-            {
-                throw new StatusCodeException(HttpStatusCode.BadRequest, "Code is expired!");
-            }
-            return true;
-        }
-
         public async Task<bool> VerifyPasswordAsync(ResetPasswordDto resetPasswordDto)
         {
             var admin = await _unitOfWork.Admins.FirstOrDefaultAsync(x => x.Email == resetPasswordDto.Email);

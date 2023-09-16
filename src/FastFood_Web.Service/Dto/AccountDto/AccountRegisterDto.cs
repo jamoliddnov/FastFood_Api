@@ -19,7 +19,6 @@ namespace FastFood_Web.Service.Dto.AccountDto
         {
             return new User()
             {
-                Email = accountRegister.Email,
                 FullName = accountRegister.FullName,
                 PhoneNumber = accountRegister.PhoneNumber,
                 PasswordHash = accountRegister.Password

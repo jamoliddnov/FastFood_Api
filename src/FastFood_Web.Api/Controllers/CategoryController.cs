@@ -22,7 +22,7 @@ namespace FastFood_Web.Api.Controllers
             return Ok(await _categoryService.CreateAsync(category));
         }
 
-        [HttpPost("update")]
+        [HttpPut("update")]
         public async Task<IActionResult> UpdateAsync(string id, [FromForm] CategoryDto categoryDto)
         {
             return Ok(await _categoryService.UpdateAsync(id, categoryDto));

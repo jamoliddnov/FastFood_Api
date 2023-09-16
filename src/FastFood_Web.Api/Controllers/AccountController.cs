@@ -1,54 +1,31 @@
 ﻿using FastFood_Web.Service.Dto.AccountDto;
 using FastFood_Web.Service.Interfaces.Accounts;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastFood_Web.Api.Controllers
 {
-    [Route("api/accounts")]
+    [Route("api/users")]
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly IAccountSevrice _accountSevrice;
+        private readonly IAccountSevrice _accountService;
 
-        public AccountController(IAccountSevrice accountSevrice)
+        public AccountController(IAccountSevrice accountService)
         {
-            _accountSevrice = accountSevrice;
+            _accountService = accountService;
         }
-
-        [HttpPost("login")]
-        [AllowAnonymous]
-        public async Task<IActionResult> LoginAsync([FromForm] AccountLoginDto accountLoginDto)
-        {
-            return Ok(await _accountSevrice.LoginAsync(accountLoginDto));
-        }
-
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsynv([FromForm] AccountRegisterDto accountRegisterDto)
+        public async Task<IActionResult> RegisterAsync([FromForm] AccountRegisterDto accountRegisterDto)
         {
-            return Ok(await _accountSevrice.RegisterAsync(accountRegisterDto));
+            return Ok(await _accountService.RegisterAsync(accountRegisterDto));
         }
 
-        [HttpPost("send-to-Email")]
-        public async Task<IActionResult> SendToEmail([FromForm] SendCodeToEmailDto sendToEmail)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateAsync(string id, [FromForm] AccountUpdateDto accountUpdateDto)
         {
-            //var result = await _accountSevrice.SendCodeAsync(sendToEmail);
-            return Ok();
+            return Ok(await _accountService.UpdateAsync(id, accountUpdateDto));
         }
-
-        //[HttpPatch("email-Verify")]
-        //public async Task<IActionResult> UpdatePassword([FromForm] EmailVerifyDto updateDto)
-        //{
-        //    return Ok(await _accountSevrice.VerifyResetPasswordAsync(updateDto));
-        //}
-
-        //[HttpPost("reset-Password")]
-        //public async Task<IActionResult> VerifyEmailAsync([FromForm] ResetPasswordDto userReset)
-        //{
-        //    return Ok(await _accountSevrice.UpdatePasswordAsync(userReset));
-        //}
-
 
     }
 }

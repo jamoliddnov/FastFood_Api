@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FastFood_Web.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230912191042_CreateDate")]
-    partial class CreateDate
+    [Migration("20230916163049_CreateDateBase")]
+    partial class CreateDateBase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -315,13 +315,6 @@ namespace FastFood_Web.DataAccess.Migrations
             modelBuilder.Entity("FastFood_Web.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FullName")

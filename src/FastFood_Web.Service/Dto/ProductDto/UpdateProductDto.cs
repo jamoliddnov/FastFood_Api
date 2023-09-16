@@ -1,5 +1,4 @@
-﻿using FastFood_Web.Domain.Entities;
-using FastFood_Web.Domain.Enums;
+﻿using FastFood_Web.Domain.Enums;
 using FastFood_Web.Service.Common.Attributes;
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
