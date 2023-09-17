@@ -31,6 +31,8 @@ namespace FastFood_Web.DataAccess.Repositories.Common
 
         public IUserRepositorie Users { get; }
 
+        public ILocationRepositories Locations { get; }
+
         public UnitOfWork(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -46,6 +48,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
             RecevingOperators = new RecevingOperatorRepositorie(appDbContext);
             Products = new ProductRepositorie(appDbContext);
             Users = new UserRepositorie(appDbContext);
+            Locations = new LocationRepositories(appDbContext);
         }
 
         public EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class

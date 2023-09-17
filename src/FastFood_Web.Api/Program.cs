@@ -34,6 +34,7 @@ if (app.Services.GetService<IHttpContextAccessor>() != null)
 }
 
 app.UseMiddleware<TokenRedirectMiddleware>();
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

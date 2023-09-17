@@ -21,4 +21,9 @@
 		<ProjectReference Include="..\FastFood_Web.Service\FastFood_Web.Service.csproj" />
 	</ItemGroup>
 
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\images\" />
+	</ItemGroup>
+
 </Project>

@@ -2,7 +2,6 @@
 using FastFood_Web.Service.Interfaces.Common;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using System.Diagnostics.CodeAnalysis;
 
 namespace FastFood_Web.Service.Services.Common
 {
@@ -14,7 +13,7 @@ namespace FastFood_Web.Service.Services.Common
         {
             _rootPath = webHostEnvironment.WebRootPath;
         }
-        public async Task<string> SaveImageAsync([DisallowNull] IFormFile image)
+        public async Task<string> SaveImageAsync(IFormFile image)
         {
             try
             {
