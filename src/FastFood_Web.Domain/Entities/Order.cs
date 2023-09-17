@@ -8,7 +8,8 @@ namespace FastFood_Web.Domain.Entities
     {
         public string Description { get; set; } = string.Empty;
         public double TotalSum { get; set; }
-        public string Location { get; set; } = string.Empty;
+        public string LocationId { get; set; } = string.Empty;
+        public virtual Location Location { get; set; } = default!;
         public bool OrderCancellation { get; set; } = false;
         public DateTime CreateAt { get; set; }
         public DateTime UpdateAt { get; set; }
