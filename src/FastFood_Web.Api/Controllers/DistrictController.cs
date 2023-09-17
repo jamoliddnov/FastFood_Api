@@ -35,10 +35,8 @@ namespace FastFood_Web.Api.Controllers
 
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAllAsync()
-        { 
+        {
             return Ok(await _districtService.GetAllAsync());
         }
-
-
     }
 }
