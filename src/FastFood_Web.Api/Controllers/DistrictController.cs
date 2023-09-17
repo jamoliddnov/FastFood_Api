@@ -38,5 +38,7 @@ namespace FastFood_Web.Api.Controllers
         {
             return Ok(await _districtService.GetAllAsync());
         }
+
+
     }
 }

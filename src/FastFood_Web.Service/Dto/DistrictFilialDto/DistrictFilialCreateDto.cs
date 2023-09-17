@@ -10,7 +10,7 @@ namespace FastFood_Web.Service.Dto.DistrictFilialDto
         [Required, MaxLength(30)]
         public string Name { get; set; } = String.Empty;
         [MaxFileSize(2), AllowedFiles(new string[] { ".jpg", ".png", ".jpeg", ".svg", ".web" })]
-        public IFormFile? FormFile { get; set; }
+        public IFormFile? Image { get; set; }
         [Required, Number]
         public string Latitude { get; set; } = String.Empty;
         [Required, Number]

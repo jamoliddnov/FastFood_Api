@@ -16,6 +16,7 @@ namespace FastFood_Web.DataAccess.Interfaces.Common
         public IRecevingOperatorRepositorie RecevingOperators { get; }
         public IProductRepositorie Products { get; }
         public IUserRepositorie Users { get; }
+        public ILocationRepositories Locations { get; }
 
         public EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
         public Task<int> SaveChangeAsync();
