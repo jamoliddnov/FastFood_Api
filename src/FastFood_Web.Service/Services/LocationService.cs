@@ -23,7 +23,7 @@ namespace FastFood_Web.Service.Services
 
                 if (result > 0)
                 {
-                    var resultLocation = await _unitOfWork.Locations.LastOrDefaultAsync(location);
+                    var resultLocation = await _unitOfWork.Locations.LastOrDefaultAsync(x => x.Id == location.Id);
                     if (resultLocation != null)
                     {
                         return resultLocation.Id;
@@ -35,6 +35,24 @@ namespace FastFood_Web.Service.Services
             catch
             {
                 return "";
+            }
+        }
+
+        public async Task<Location>? GetByIdAsync(string id)
+        {
+            try
+            {
+                var result = await _unitOfWork.Locations.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (result == null)
+                {
+                    return null;
+                }
+                return result;
+            }
+            catch
+            {
+                return null;
             }
         }
     }

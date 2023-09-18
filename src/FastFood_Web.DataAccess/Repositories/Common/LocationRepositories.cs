@@ -2,6 +2,7 @@
 using FastFood_Web.DataAccess.Interfaces.Common;
 using FastFood_Web.Domain.Common;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace FastFood_Web.DataAccess.Repositories.Common
 {
@@ -12,11 +13,11 @@ namespace FastFood_Web.DataAccess.Repositories.Common
         {
         }
 
-        public async Task<Location?> LastOrDefaultAsync(Location location)
+        public async Task<Location?> LastOrDefaultAsync(Expression<Func<Location, bool>> expression)
         {
             try
             {
-                var result = await _dbSet.OrderByDescending(x => x.Id).LastOrDefaultAsync(x => x.Latitude == location.Latitude && x.Longitude == location.Longitude);
+                var result = await _dbSet.OrderByDescending(x => x.Id).LastOrDefaultAsync(expression);
 
                 if (result != null)
                 {
