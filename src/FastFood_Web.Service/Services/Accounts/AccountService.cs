@@ -2,6 +2,7 @@
 using FastFood_Web.Domain.Entities;
 using FastFood_Web.Service.Common.Exceptions;
 using FastFood_Web.Service.Dto.AccountDto;
+using FastFood_Web.Service.Interfaces;
 using FastFood_Web.Service.Interfaces.Accounts;
 using FastFood_Web.Service.Interfaces.Common;
 using Microsoft.EntityFrameworkCore;
@@ -19,15 +20,19 @@ namespace FastFood_Web.Service.Services.Accounts
         private readonly IMemoryCache _memoryCache;
         private readonly IEmailService _emailService;
         private readonly IIdentityService _identityService;
+        private readonly ICustomerService _customerService;
+        private readonly IUserService _userService;
 
         public AccountService(IUnitOfWork unitOfWork, IAuthManager authManager, IMemoryCache memoryCache,
-            IEmailService emailService, IIdentityService identityService)
+            IEmailService emailService, IIdentityService identityService, ICustomerService customerService, IUserService userService)
         {
             _unitOfWork = unitOfWork;
             _authManager = authManager;
             _memoryCache = memoryCache;
             _emailService = emailService;
             _identityService = identityService;
+            _customerService = customerService;
+            _userService = userService;
         }
 
         public async Task<bool> RegisterAsync(AccountRegisterDto accountCreate)
@@ -43,11 +48,11 @@ namespace FastFood_Web.Service.Services.Accounts
             user.Salt = "";
             user.PasswordHash = "";
 
-            _unitOfWork.Users.Add(user);
+            await _userService.CreateAsync(user);
 
             Customer customer = new Customer();
             customer.UserId = user.Id;
-            _unitOfWork.Customers.Add(customer);
+            var resultCustomer = await _customerService.CreateAsync(customer);
 
             var result = await _unitOfWork.SaveChangeAsync();
             return result > 0;

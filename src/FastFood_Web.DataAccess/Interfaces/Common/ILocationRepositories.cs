@@ -5,6 +5,6 @@ namespace FastFood_Web.DataAccess.Interfaces.Common
 {
     public interface ILocationRepositories : IGenericRepositorie<Location>
     {
-        public Task<Location?> LastOrDefaultAsync(Expression<Func<Location, bool>> expression);
+        public Task<Location>? LastOrDefaultAsync(Expression<Func<Location, bool>> expression);
     }
 }
