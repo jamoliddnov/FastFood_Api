@@ -6,7 +6,7 @@ namespace FastFood_Web.Service.Dto.AccountDto
 {
     public class AccountRegisterDto
     {
-        [Required, MinLength(8), MaxLength(40)]
+        [Required, MinLength(1), MaxLength(40)]
         public string FullName { get; set; } = String.Empty;
         [Required, PhoneNumberAttribute]
         public string PhoneNumber { get; set; } = String.Empty;

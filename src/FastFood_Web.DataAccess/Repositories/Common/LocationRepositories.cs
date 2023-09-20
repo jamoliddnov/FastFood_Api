@@ -13,7 +13,7 @@ namespace FastFood_Web.DataAccess.Repositories.Common
         {
         }
 
-        public async Task<Location?> LastOrDefaultAsync(Expression<Func<Location, bool>> expression)
+        public async Task<Location>? LastOrDefaultAsync(Expression<Func<Location, bool>> expression)
         {
             try
             {

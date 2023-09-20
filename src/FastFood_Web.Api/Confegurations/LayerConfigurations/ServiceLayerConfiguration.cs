@@ -24,8 +24,12 @@ namespace FastFood_Web.Api.Confegurations.LayerConfigurations
             serviceDescriptors.AddScoped<IEmailService, EmailService>();
             serviceDescriptors.AddScoped<IFileService, FileService>();
             serviceDescriptors.AddScoped<ICategoryService, CategoryService>();
+            serviceDescriptors.AddScoped<ICustomerService, CustomerService>();
+            serviceDescriptors.AddScoped<IUserService, UserService>();
             serviceDescriptors.AddScoped<IProductService, ProductService>();
             serviceDescriptors.AddScoped<IDistrictService, DistrictService>();
+            serviceDescriptors.AddScoped<IOrderService, OrderService>();
+            serviceDescriptors.AddScoped<IOrderDetailService, OrderDetailService>();
             serviceDescriptors.AddScoped<IPaginatonService, PaginationService>();
             serviceDescriptors.AddScoped<IDistrictFilialService, DistrictFilialService>();
             serviceDescriptors.AddScoped<ILocationService, LocationService>();
