@@ -1,4 +1,5 @@
-﻿using FastFood_Web.Service.Interfaces;
+﻿using FastFood_Web.Service.Dto.OrderDto;
+using FastFood_Web.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastFood_Web.Api.Controllers
@@ -14,10 +15,12 @@ namespace FastFood_Web.Api.Controllers
             _orderService = orderService;
         }
 
-        [HttpPost("create")]
-        public async Task<IActionResult> CreateAsync()
+        [HttpPost("createOrderId")]
+        public async Task<IActionResult> CreateAsync([FromBody] OrderCreateDto orderCreateDto)
         {
-            return Ok();
+
+
+            return Ok(await _orderService.CreateAsync(orderCreateDto));
         }
 
         [HttpPut("update")]

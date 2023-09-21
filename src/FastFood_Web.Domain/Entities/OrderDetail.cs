@@ -6,8 +6,8 @@ namespace FastFood_Web.Domain.Entities
     {
         public string OrderId { get; set; } = string.Empty;
         public virtual Order Order { get; set; } = default!;
-        public string TypeFastFoodId { get; set; } = string.Empty;
-        public virtual Product TypeFastFood { get; set; } = default!;
+        public string ProductId { get; set; } = string.Empty;
+        public virtual Product Product { get; set; } = default!;
         public byte Amount { get; set; }
         public double Price { get; set; }
     }

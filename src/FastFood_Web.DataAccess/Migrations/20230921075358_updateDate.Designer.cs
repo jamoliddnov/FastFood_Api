@@ -3,6 +3,7 @@ using System;
 using FastFood_Web.DataAccess.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FastFood_Web.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230921075358_updateDate")]
+    partial class updateDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,6 +233,7 @@ namespace FastFood_Web.DataAccess.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("DeliverId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
@@ -250,6 +253,7 @@ namespace FastFood_Web.DataAccess.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ReceivingOperatorId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<double>("TotalSum")
@@ -439,7 +443,9 @@ namespace FastFood_Web.DataAccess.Migrations
 
                     b.HasOne("FastFood_Web.Domain.Entities.Empolyees.Deliver", "Deliver")
                         .WithMany()
-                        .HasForeignKey("DeliverId");
+                        .HasForeignKey("DeliverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FastFood_Web.Domain.Common.Location", "Location")
                         .WithMany()
@@ -449,7 +455,9 @@ namespace FastFood_Web.DataAccess.Migrations
 
                     b.HasOne("FastFood_Web.Domain.Entities.Empolyees.ReceivingOperator", "ReceivingOperator")
                         .WithMany()
-                        .HasForeignKey("ReceivingOperatorId");
+                        .HasForeignKey("ReceivingOperatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Customer");
 
