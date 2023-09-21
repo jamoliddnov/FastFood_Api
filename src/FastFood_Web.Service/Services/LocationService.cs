@@ -19,18 +19,7 @@ namespace FastFood_Web.Service.Services
             {
                 _unitOfWork.Locations.Add(location);
 
-                var result = await _unitOfWork.SaveChangeAsync();
-
-                if (result > 0)
-                {
-                    var resultLocation = await _unitOfWork.Locations.LastOrDefaultAsync(x => x.Id == location.Id);
-                    if (resultLocation != null)
-                    {
-                        return resultLocation.Id;
-                    }
-                }
-
-                return "";
+                return location.Id;
             }
             catch
             {

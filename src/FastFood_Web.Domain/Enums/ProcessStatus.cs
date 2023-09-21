@@ -2,8 +2,9 @@
 {
     public enum ProcessStatus
     {
-        IsBeingPrepared = 0,
-        OnTheWay = 1,
-        Delivered = 2
+        IsExpected = 0,
+        IsBeingPrepared = 1,
+        OnTheWay = 2,
+        Delivered = 3
     }
 }
