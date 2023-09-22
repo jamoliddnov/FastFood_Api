@@ -18,8 +18,6 @@ namespace FastFood_Web.Api.Controllers
         [HttpPost("createOrderId")]
         public async Task<IActionResult> CreateAsync([FromBody] OrderCreateDto orderCreateDto)
         {
-
-
             return Ok(await _orderService.CreateAsync(orderCreateDto));
         }
 
@@ -32,7 +30,7 @@ namespace FastFood_Web.Api.Controllers
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteAsync(string id)
         {
-            return Ok();
+            return Ok(await _orderService.DeleteAsync(id));
         }
 
         [HttpGet("getAll")]

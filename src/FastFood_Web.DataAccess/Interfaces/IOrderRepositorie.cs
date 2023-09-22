@@ -5,5 +5,6 @@ namespace FastFood_Web.DataAccess.Interfaces
 {
     public interface IOrderRepositorie : IGenericRepositorie<Order>
     {
+        public Task<Order?> GetByIdAsync(string id);
     }
 }

@@ -2,6 +2,8 @@
 using FastFood_Web.Domain.Entities;
 using FastFood_Web.Service.Interfaces;
 
+#pragma warning disable
+
 namespace FastFood_Web.Service.Services
 {
     public class CustomerService : ICustomerService

@@ -9,6 +9,8 @@ using FastFood_Web.Service.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
+#pragma warning disable
+
 namespace FastFood_Web.Service.Services
 {
     public class ProductService : IProductService
