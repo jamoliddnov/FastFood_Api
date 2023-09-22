@@ -1,9 +1,12 @@
-﻿using FastFood_Web.DataAccess.Interfaces.Common;
+﻿using FastFood_Web.DataAccess.DbContexts;
+using FastFood_Web.DataAccess.Interfaces.Common;
 using FastFood_Web.Domain.Common;
 using FastFood_Web.Domain.Entities;
+using FastFood_Web.Service.Common.Exceptions;
 using FastFood_Web.Service.Dto.OrderDto;
 using FastFood_Web.Service.Helpers;
 using FastFood_Web.Service.Interfaces;
+using System.Net;
 
 #pragma warning disable
 
@@ -48,12 +51,8 @@ namespace FastFood_Web.Service.Services
 
                 var res = await _unitOfWork.SaveChangeAsync();
 
-
-
                 var resultSum = await _orderService.CreateAsync(order.Id, orderCreateDto.OrderDetails);
                 order.TotalSum = resultSum;
-
-
 
                 _unitOfWork.Orders.Update(order, order.Id);
 
@@ -66,15 +65,47 @@ namespace FastFood_Web.Service.Services
                 return false;
             }
         }
+
+        public async Task<bool> DeleteAsync(string id)
+        {
+            try
+            {
+                var resultOrder =  await _unitOfWork.Orders.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (resultOrder == null)
+                {
+                    throw new StatusCodeException(HttpStatusCode.NotFound, "Not found order!");
+                }
+
+                _unitOfWork.Orders.Delete(id);
+
+                var result = await _unitOfWork.SaveChangeAsync();
+
+                return result > 0;
+
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<Order> GetByIdAsync(string id)
+        {
+            try
+            {
+                var result = await _unitOfWork.Orders.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (result == null)
+                {
+                    throw new StatusCodeException(HttpStatusCode.NotFound,"Not found order!");
+                }
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }
-
-//public double TotalSum { get; set; }
-//public string LocationId { get; set; } = string.Empty;
-//public virtual Location Location { get; set; } = default!;
-//public string ReceivingOperatorId { get; set; } = string.Empty;
-//public ReceivingOperator ReceivingOperator { get; set; } = default!;
-//public string CustomerId { get; set; } = string.Empty;
-//public virtual Customer Customer { get; set; } = default!;
-//public string DeliverId { get; set; } = string.Empty;
-//public virtual Deliver Deliver { get; set; } = default!;

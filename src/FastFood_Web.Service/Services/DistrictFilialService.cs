@@ -8,6 +8,8 @@ using FastFood_Web.Service.Interfaces.Common;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
+#pragma warning disable
+
 namespace FastFood_Web.Service.Services
 {
     public class DistrictFilialService : IDistrictFilialService

@@ -2,6 +2,8 @@
 using FastFood_Web.Domain.Common;
 using FastFood_Web.Service.Interfaces;
 
+#pragma warning disable
+
 namespace FastFood_Web.Service.Services
 {
     public class LocationService : ILocationService
