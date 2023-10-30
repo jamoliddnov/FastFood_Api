@@ -4,5 +4,6 @@
     {
         public string Id { get; }
         public string Email { get; }
+        public string UserRole { get; }
     }
 }

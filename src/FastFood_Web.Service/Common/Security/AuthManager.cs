@@ -22,6 +22,7 @@ namespace FastFood_Web.Service.Common.Security
             var claims = new[] {
                 new Claim("Id", customer.Id.ToString()),
                 new Claim(ClaimTypes.Role, customer.UserRole.ToString())
+
             };
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecretKey"]));
@@ -39,6 +40,7 @@ namespace FastFood_Web.Service.Common.Security
             var claims = new[] {
                 new Claim("Id", customer.Id.ToString()),
                 new Claim(ClaimTypes.Email, customer.Email),
+                 new Claim(ClaimTypes.Role, customer.UserRole.ToString())
 
             };
 

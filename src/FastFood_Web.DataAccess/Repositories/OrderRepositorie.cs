@@ -2,7 +2,8 @@
 using FastFood_Web.DataAccess.Interfaces;
 using FastFood_Web.DataAccess.Repositories.Common;
 using FastFood_Web.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+using FastFood_Web.Domain.Enums;
+
 
 namespace FastFood_Web.DataAccess.Repositories
 {
@@ -10,25 +11,23 @@ namespace FastFood_Web.DataAccess.Repositories
     {
         public OrderRepositorie(AppDbContext dbContext) : base(dbContext)
         {
+
         }
 
-        public async Task<Order?> GetByIdAsync(string id)
+        public virtual IQueryable<Order>? GetAll(ProcessStatus status)
         {
             try
             {
-                var result = _dbSet.Include(x => x.Id);
-
-                if (result != null)
-                {
-                   
-                }
-
-                return null;
+              //  ProcessStatus[] allStatus = (ProcessStatus[])Enum.GetValues(typeof(ProcessStatus));
+                var res = _dbSet.Where(x => x.ProcessStatus == status);
+                return res;
             }
             catch
             {
                 return null;
             }
         }
+
+
     }
 }

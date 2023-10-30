@@ -6,6 +6,8 @@ using FastFood_Web.Service.Dto.AdminDto;
 using FastFood_Web.Service.Interfaces;
 using FastFood_Web.Service.Interfaces.Common;
 using System.Net;
+using System.Resources;
+
 
 namespace FastFood_Web.Service.Services
 {
@@ -13,15 +15,25 @@ namespace FastFood_Web.Service.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAuthManager _authManager;
+        private readonly IIdentityService _identityService;
 
-        public AdminService(IUnitOfWork unitOfWork, IAuthManager authManager)
+
+        public AdminService(IUnitOfWork unitOfWork, IAuthManager authManager, IIdentityService identityService)
         {
             _unitOfWork = unitOfWork;
             _authManager = authManager;
+            _identityService = identityService;
+
         }
 
         public async Task<string> LoginAsync(AdminLoginDto adminLoginDto)
         {
+
+            //Properties.Settings.Default.Password = txtTex.Text;
+            ResourceManager resourceManager = new ResourceManager("Email.Resources", typeof(string).Assembly);
+
+
+            var r = Properties.Resources.Email;
             var adminEmail = await _unitOfWork.Admins.FirstOrDefaultAsync(x => x.Email == adminLoginDto.Email);
 
             if (adminEmail is null)
@@ -33,7 +45,12 @@ namespace FastFood_Web.Service.Services
 
             if (adminPassword)
             {
-                return _authManager.GenerateAdminToken(adminEmail);
+
+                var res = _authManager.GenerateAdminToken(adminEmail);
+
+                var role = _identityService.UserRole;
+
+                return res;
             }
             else
             {

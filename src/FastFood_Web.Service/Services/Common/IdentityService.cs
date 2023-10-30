@@ -28,8 +28,18 @@ namespace FastFood_Web.Service.Services.Common
         {
             get
             {
-                var res = _accessor.HttpContext!.User.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress");
+                var res = _accessor.HttpContext!.User.FindFirst(ClaimTypes.Email);
                 return res is not null ? res.Value : string.Empty;
+            }
+        }
+
+        public string UserRole
+        {
+            get
+            {
+                var res = _accessor.HttpContext!.User.FindFirst(ClaimTypes.Role)?.Value;
+                return res is not null ? res : string.Empty;
+
             }
         }
     }

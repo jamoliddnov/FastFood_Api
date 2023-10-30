@@ -1,7 +1,7 @@
 using FastFood_Web.Api.Confegurations;
 using FastFood_Web.Api.Confegurations.LayerConfigurations;
 using FastFood_Web.Api.Middlewares;
-using FastFood_Web.Service.Helpers;
+using FastFood_Web.Service.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDataAccess(builder.Configuration);
+
 builder.Services.AddService();
 builder.Services.AddMemoryCache();
 
@@ -28,12 +29,13 @@ if (app.Environment.IsDevelopment())
 }
 
 
+
+
+app.UseMiddleware<TokenRedirectMiddleware>();
 if (app.Services.GetService<IHttpContextAccessor>() != null)
 {
     HttpContextHelper.Accessor = app.Services.GetRequiredService<IHttpContextAccessor>();
 }
-
-app.UseMiddleware<TokenRedirectMiddleware>();
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();

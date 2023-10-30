@@ -14,6 +14,7 @@ namespace FastFood_Web.Api.Confegurations.LayerConfigurations
     {
         public static void AddService(this IServiceCollection serviceDescriptors)
         {
+
             serviceDescriptors.AddHttpContextAccessor();
             serviceDescriptors.AddScoped<IUnitOfWork, UnitOfWork>();
 

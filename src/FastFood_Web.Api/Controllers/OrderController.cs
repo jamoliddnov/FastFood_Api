@@ -1,5 +1,7 @@
-﻿using FastFood_Web.Service.Dto.OrderDto;
+﻿using FastFood_Web.Domain.Enums;
+using FastFood_Web.Service.Dto.OrderDto;
 using FastFood_Web.Service.Interfaces;
+using FastFood_Web.Service.Services.Common.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastFood_Web.Api.Controllers
@@ -15,16 +17,16 @@ namespace FastFood_Web.Api.Controllers
             _orderService = orderService;
         }
 
-        [HttpPost("createOrderId")]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateAsync([FromBody] OrderCreateDto orderCreateDto)
         {
             return Ok(await _orderService.CreateAsync(orderCreateDto));
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateAsync()
+        public async Task<IActionResult> UpdateAsync(string id, [FromForm] OrderUpdateDto orderCreateDto)
         {
-            return Ok();
+            return Ok(await _orderService.UpdateAsync(id, orderCreateDto));
         }
 
         [HttpDelete("delete")]
@@ -34,15 +36,15 @@ namespace FastFood_Web.Api.Controllers
         }
 
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync(ProcessStatus processStatus)
         {
-            return Ok();
+            return Ok(await _orderService.GetAllAsync(new PagenationParams(1), processStatus));
         }
 
         [HttpGet("getById")]
         public async Task<IActionResult> GetByIdAsync(string id)
         {
-            return Ok();
+            return Ok(await _orderService.GetByIdAsync(id));
         }
     }
 }

@@ -14,7 +14,7 @@
             {
                 if (!string.IsNullOrEmpty(accessToken))
                 {
-                    string bearerToken = String.Format("Bearer {0}", accessToken);
+                    string bearerToken = $"Bearer {accessToken}";
                     httpContext.Request.Headers.Add("Authorization", bearerToken);
                 }
             }
