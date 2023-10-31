@@ -2,6 +2,7 @@
 using FastFood_Web.DataAccess.Interfaces;
 using FastFood_Web.DataAccess.Repositories.Common;
 using FastFood_Web.Domain.Entities;
+using FastFood_Web.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace FastFood_Web.DataAccess.Repositories
@@ -12,18 +13,13 @@ namespace FastFood_Web.DataAccess.Repositories
         {
         }
 
-        public async Task<Order?> GetByIdAsync(string id)
+        public IQueryable<Order>? GetAll(ProcessStatus status)
         {
             try
             {
-                var result = _dbSet.Include(x => x.Id);
+                var result = _dbSet.Where(x => x.ProcessStatus == status).AsNoTracking();
 
-                if (result != null)
-                {
-                   
-                }
-
-                return null;
+                return result;
             }
             catch
             {

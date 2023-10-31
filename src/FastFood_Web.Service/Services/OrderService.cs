@@ -1,11 +1,13 @@
-﻿using FastFood_Web.DataAccess.DbContexts;
-using FastFood_Web.DataAccess.Interfaces.Common;
+﻿using FastFood_Web.DataAccess.Interfaces.Common;
 using FastFood_Web.Domain.Common;
 using FastFood_Web.Domain.Entities;
+using FastFood_Web.Domain.Enums;
 using FastFood_Web.Service.Common.Exceptions;
 using FastFood_Web.Service.Dto.OrderDto;
 using FastFood_Web.Service.Helpers;
 using FastFood_Web.Service.Interfaces;
+using FastFood_Web.Service.Services.Common.Utils;
+using FastFood_Web.Service.ViewModels;
 using System.Net;
 
 #pragma warning disable
@@ -70,7 +72,7 @@ namespace FastFood_Web.Service.Services
         {
             try
             {
-                var resultOrder =  await _unitOfWork.Orders.FirstOrDefaultAsync(x => x.Id == id);
+                var resultOrder = await _unitOfWork.Orders.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (resultOrder == null)
                 {
@@ -90,7 +92,37 @@ namespace FastFood_Web.Service.Services
             }
         }
 
-        public async Task<Order> GetByIdAsync(string id)
+        public async Task<IEnumerable<OrderViewModel>>? GetAllAsync(PagenationParams @params, ProcessStatus status)
+        {
+            try
+            {
+
+                var resultOrder = _unitOfWork.Orders.GetAll(status);
+
+                IList<OrderViewModel> result = new List<OrderViewModel>();
+
+                if (resultOrder != null)
+                {
+                    foreach (var item in resultOrder)
+                    {
+                        OrderViewModel resultViewModel = new OrderViewModel();
+                        resultViewModel.Description = item.Description;
+                        resultViewModel.TotalSum = item.TotalSum;
+
+                        result.Add(resultViewModel);
+                    }
+
+                    return result;
+                }
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public async Task<OrderViewModel> GetByIdAsync(string id)
         {
             try
             {
@@ -98,13 +130,70 @@ namespace FastFood_Web.Service.Services
 
                 if (result == null)
                 {
-                    throw new StatusCodeException(HttpStatusCode.NotFound,"Not found order!");
+                    throw new StatusCodeException(HttpStatusCode.NotFound, "Not found order!");
                 }
-                return result;
+
+                OrderViewModel orderViewModel = new OrderViewModel()
+                {
+                    CreateAt = result.CreateAt,
+                    UpdateAt = result.UpdateAt,
+                    CustomerId = result.CustomerId,
+                    OrderCancellation = result.OrderCancellation,
+                    DeliverId = result.DeliverId,
+                    Description = result.Description,
+                    LocationId = result.LocationId,
+                    PaymentType = result.PaymentType,
+                    ProcessStatus = result.ProcessStatus,
+                    ReceivingOperatorId = result.ReceivingOperatorId,
+                    TotalSum = result.TotalSum,
+
+                };
+
+                return orderViewModel;
             }
             catch
             {
                 return null;
+            }
+        }
+
+        public async Task<bool> UpdateAsync(string id, OrderUpdateDto orderUpdateDto)
+        {
+            try
+            {
+                var resultOrder = await _unitOfWork.Orders.FindByIdAsync(id);
+
+                if (resultOrder != null)
+                {
+                    if (orderUpdateDto.ProcessStatus != null)
+                    {
+                        resultOrder.ProcessStatus = orderUpdateDto.ProcessStatus.Value;
+                    }
+                    if (orderUpdateDto.TotalSum != null)
+                    {
+                        resultOrder.TotalSum = (double)(orderUpdateDto.TotalSum);
+                    }
+                    if (orderUpdateDto.Description != null)
+                    {
+                        resultOrder.Description = orderUpdateDto?.Description;
+                    }
+                    if (orderUpdateDto.DeliverId != null)
+                    {
+                        resultOrder.DeliverId = orderUpdateDto.DeliverId;
+                    }
+
+                    _unitOfWork.Orders.Update(resultOrder, id);
+
+                    var result = await _unitOfWork.SaveChangeAsync();
+
+                    return result > 0;
+
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
             }
         }
     }
